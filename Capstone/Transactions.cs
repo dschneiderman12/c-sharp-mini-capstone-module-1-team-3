@@ -38,6 +38,30 @@ namespace Capstone
                 
             
         }
+        public void GiveChange()
+        {
+            int quarter = 0;
+            int dime = 0;
+            int nickel = 0;
+            while (this.Balance >= .25M)
+            {
+                quarter++;
+                Balance -= .25M;
+            
+            }
+            while (this.Balance >= .10M)
+            {
+                dime++;
+                Balance -= .10M;
+            
+            }
+            while (this.Balance >= .05M)
+            {
+                nickel++;
+                Balance -= .05M;
+            }
+            Console.WriteLine($"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s)");
+        }
 
     }
 }

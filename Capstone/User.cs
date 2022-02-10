@@ -57,7 +57,7 @@ namespace Capstone
                         {
                             menu.PrintMenu();
                             Console.WriteLine("Select the location of your desired snack");
-                            string userSelection = Console.ReadLine();
+                            string userSelection = Console.ReadLine().ToUpper();
 
                             if (menu.CanChangeQuantity(userSelection))
                             {
@@ -87,6 +87,12 @@ namespace Capstone
                                 }
                             }
                         }
+                    }
+                    if (userPurchaseChoice == "3")
+                    {
+                        Console.WriteLine($"Your Remaining Balance is {transaction.Balance.ToString("C")}.");
+                        transaction.GiveChange();
+                    
                     }
                 }
             }
