@@ -5,9 +5,16 @@ using System.IO;
 
 namespace Capstone
 {
-    public class Menu : Item
+    public class Menu
     {
-        public static List<Item> MenuItems = new List<Item>();
+        private static List<Item> menuItems = new List<Item>();
+        public List<Item> MenuItems
+        {
+            get
+            {
+                return menuItems;
+            }
+        }
 
         public static List<Item> GetMenu()// read a file and put items into the menu item list
         {
@@ -26,12 +33,12 @@ namespace Capstone
 
                         decimal price = decimal.Parse(lineArray[2]);
                         Item newItem = new Item(lineArray[0], lineArray[1], price, lineArray[3]);
-                        MenuItems.Add(newItem);
+                        menuItems.Add(newItem);
                     }
                 }
             }
             catch (Exception) { }
-            return MenuItems;
+            return menuItems;
         }
     }
 }

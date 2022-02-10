@@ -12,3 +12,4 @@ C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-3\Capstone\obj\Debug\ne
 C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-3\Capstone\obj\Debug\netcoreapp3.1\Capstone.dll
 C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-3\Capstone\obj\Debug\netcoreapp3.1\Capstone.pdb
 C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-3\Capstone\obj\Debug\netcoreapp3.1\Capstone.genruntimeconfig.cache
+C:\Users\Student\git\c-sharp-mini-capstone-module-1-team-3\Capstone\bin\Debug\netcoreapp3.1\vendingmachine.csv
