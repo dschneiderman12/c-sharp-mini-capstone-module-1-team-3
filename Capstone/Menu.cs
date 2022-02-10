@@ -7,16 +7,24 @@ namespace Capstone
 {
     public class Menu
     {
-        private static List<Item> menuItems = new List<Item>();
-        public List<Item> MenuItems
+        User menuUser = new User();   
+        //private static List<Item> menuItems = new List<Item>();
+        //public List<Item> MenuItems
+        //{
+        //    get
+        //    {
+        //        return menuItems;
+        //    }
+        //}
+        private static Dictionary<string, Item> itemDictionary = new Dictionary<string, Item>();
+        public Dictionary<string, Item> ItemDictionary
         {
             get
             {
-                return menuItems;
+                return itemDictionary;
             }
         }
-
-        public static List<Item> GetMenu()// read a file and put items into the menu item list
+        public static Dictionary<string, Item> GetMenu()// read a file and put items into the menu item list
         {
             string directory = Environment.CurrentDirectory;
             string file = "vendingmachine.csv";
@@ -33,12 +41,45 @@ namespace Capstone
 
                         decimal price = decimal.Parse(lineArray[2]);
                         Item newItem = new Item(lineArray[0], lineArray[1], price, lineArray[3]);
-                        menuItems.Add(newItem);
+                        //menuItems.Add(newItem);
+                        itemDictionary[lineArray[0]] = newItem;
+                        
                     }
                 }
             }
             catch (Exception) { }
-            return menuItems;
+            return itemDictionary;
         }
+
+        public void PrintMenu()
+        {
+            foreach(KeyValuePair<string, Item> kvp in this.ItemDictionary)
+                {
+                Console.WriteLine($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+            }
+        }
+       public bool CanChangeQuantity(string itemLocation)
+       {
+            
+            if (itemDictionary.ContainsKey(itemLocation))
+            {
+                if(itemDictionary[itemLocation].Quantity > 0)
+                {
+                    
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Sold Out:( Try again later!");
+                    return false;
+                }
+               
+            }
+            else
+            {
+                Console.WriteLine("Item location code not found. Please try again");
+                return false;
+            }
+       }
     }
 }
