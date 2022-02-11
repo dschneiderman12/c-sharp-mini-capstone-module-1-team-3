@@ -14,7 +14,6 @@ namespace Capstone
         /// <param name="moneyToFeed">number input from user</param>
         public void FeedMoney(string moneyToFeed)
         {
-
             int wholeNumber;
             bool success = int.TryParse(moneyToFeed, out wholeNumber);
             if (success)
@@ -24,7 +23,7 @@ namespace Capstone
             }
             else
             {
-                Console.WriteLine("Please enter a whole dollar amount.");
+                Console.Write("Please enter a whole dollar amount: ");
             }
         }
 
@@ -45,7 +44,7 @@ namespace Capstone
             }
             else
             {
-                Console.WriteLine("Insufficient funds.");
+                Console.WriteLine("Insufficient funds.\n");
                 return false;
             }
         }
@@ -73,7 +72,7 @@ namespace Capstone
                 nickel++;
                 this.Balance -= .05M;
             }
-            Console.WriteLine($"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s)");
+            Console.WriteLine($"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n");
         }
     }
 }

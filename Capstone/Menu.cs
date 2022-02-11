@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.IO;
+//using System.IO;
 
 namespace Capstone
 {
-    public class Menu
+    public class Menu : IMenuable
     {
-        private static Dictionary<string, Item> itemDictionary = new Dictionary<string, Item>();
-        public Dictionary<string, Item> ItemDictionary
+        //private static Dictionary<string, Item> itemMenu = new Dictionary<string, Item>();
+        public Dictionary<string, Item> ItemMenu
         {
             get
             {
-                return itemDictionary;
+                return IMenuable.GetMenu();
             }
         }
 
@@ -20,7 +20,7 @@ namespace Capstone
         /// Reads the vendingmachine.csv file, splits components and builds a dictionary with each item
         /// </summary>
         /// <returns>Item location as key, all properties of an item as the value</returns>
-        public static Dictionary<string, Item> GetMenu()
+        /*public static Dictionary<string, Item> GetMenu()
         {
             string directory = Environment.CurrentDirectory;
             string file = "vendingmachine.csv";
@@ -34,10 +34,10 @@ namespace Capstone
                     {
                         string line = sr.ReadLine();
                         string[] lineArray = line.Split("|");
-
                         decimal price = decimal.Parse(lineArray[2]);
+
                         Item newItem = new Item(lineArray[0], lineArray[1], price, lineArray[3]);
-                        itemDictionary[lineArray[0]] = newItem;
+                        itemMenu[lineArray[0]] = newItem;
                     }
                 }
             }
@@ -45,18 +45,19 @@ namespace Capstone
             {
                 Console.WriteLine(ex.Message);
             }
-            return itemDictionary;
-        }
+            return itemMenu;
+        }*/
 
         /// <summary>
         /// Prints items, their locations(item codes), prices, and remaining quantity of each
         /// </summary>
         public void PrintMenu()
         {
-            foreach (KeyValuePair<string, Item> kvp in this.ItemDictionary)
+            foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
-                Console.WriteLine($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                Console.WriteLine($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining.");
             }
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -64,25 +65,38 @@ namespace Capstone
         /// </summary>
         /// <param name="itemLocation">Item code provided by user</param>
         /// <returns>True if the item has not yet run out, false if there are none left or if the code is not one listed in the dictionary</returns>
-        public bool ItemAvailability(string itemLocation)
+        /*public bool ItemAvailability(string itemLocation)
         {
-            if (itemDictionary.ContainsKey(itemLocation))
+            if (itemMenu.ContainsKey(itemLocation))
             {
-                if (itemDictionary[itemLocation].Quantity > 0)
+                //itemMenu[itemLocation].Quantity > 0 ? true : Console.WriteLine("Sold Out :( Try again later!\n") false
+                if (itemMenu[itemLocation].Quantity > 0)
                 {
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Sold Out :( Try again later!");
+                    Console.WriteLine("Sold Out :( Try again later!\n");
                     return false;
                 }
             }
             else
             {
-                Console.WriteLine("Item location code not found. Please try again");
+                Console.WriteLine("Item location code not found. Please try again.\n");
                 return false;
             }
+        }*/
+
+        public bool ItemExists(string itemLocation)
+        {
+            bool exists = ItemMenu.ContainsKey(itemLocation) ? true : false;
+            return exists;
+        }
+
+        public bool ItemAvailable(string itemLocation)
+        {
+            bool available = ItemMenu.ContainsKey(itemLocation) ? true : false;
+            return available;
         }
 
         /// <summary>
@@ -91,21 +105,21 @@ namespace Capstone
         /// <param name="userSelection">Item code provided by user</param>
         public void ItemMessage(string userSelection)
         {
-            if (ItemDictionary[userSelection].Type == "Chip")
+            if (ItemMenu[userSelection].Type == "Chip")
             {
-                Console.WriteLine("Crunch Crunch, Yum!");
+                Console.WriteLine("Crunch Crunch, Yum!\n");
             }
-            else if (ItemDictionary[userSelection].Type == "Candy")
+            else if (ItemMenu[userSelection].Type == "Candy")
             {
-                Console.WriteLine("Munch Munch, Yum!");
+                Console.WriteLine("Munch Munch, Yum!\n");
             }
-            else if (ItemDictionary[userSelection].Type == "Drink")
+            else if (ItemMenu[userSelection].Type == "Drink")
             {
-                Console.WriteLine("Glug Glug, Yum!");
+                Console.WriteLine("Glug Glug, Yum!\n");
             }
-            else if (ItemDictionary[userSelection].Type == "Gum")
+            else if (ItemMenu[userSelection].Type == "Gum")
             {
-                Console.WriteLine("Chew Chew, Yum!");
+                Console.WriteLine("Chew Chew, Yum!\n");
             }
         }
     }

@@ -7,7 +7,7 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            User.MainMenu();
+            UserInterface.MainMenu();
         }
     }
 }
