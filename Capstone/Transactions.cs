@@ -6,10 +6,15 @@ namespace Capstone
 {
     public class Transactions
     {
-        public decimal Balance { get; set; }
-        public void FeedMoney( string moneyToFeed)
+        public decimal Balance { get; private set; }
+
+        /// <summary>
+        /// Accepts money from user and adds it to the balance, making sure the amount given is a whole number
+        /// </summary>
+        /// <param name="moneyToFeed">number input from user</param>
+        public void FeedMoney(string moneyToFeed)
         {
-            
+
             int wholeNumber;
             bool success = int.TryParse(moneyToFeed, out wholeNumber);
             if (success)
@@ -19,9 +24,17 @@ namespace Capstone
             }
             else
             {
-                Console.WriteLine("Please enter a whole dollar amount");
+                Console.WriteLine("Please enter a whole dollar amount.");
             }
         }
+
+        /// <summary>
+        /// Checks that the price of the item selected is not more than the remaining balance, 
+        /// and subtracts the price from the balance if true.  
+        /// Otherwise, lets the user know they do not have enough to purchase the item.
+        /// </summary>
+        /// <param name="price">reads the price of the item selected</param>
+        /// <returns>returns true if there is enough money for the item, or false if not</returns>
         public bool PurchaseItem(decimal price)
         {
 
@@ -34,10 +47,12 @@ namespace Capstone
             {
                 Console.WriteLine("Insufficient funds.");
                 return false;
-            }  
-                
-            
+            }
         }
+
+        /// <summary>
+        /// Takes the remaining balance and provides change in quarters, dimes, and nickels using the fewest coins possible.
+        /// </summary>
         public void GiveChange()
         {
             int quarter = 0;
@@ -46,22 +61,19 @@ namespace Capstone
             while (this.Balance >= .25M)
             {
                 quarter++;
-                Balance -= .25M;
-            
+                this.Balance -= .25M;
             }
             while (this.Balance >= .10M)
             {
                 dime++;
-                Balance -= .10M;
-            
+                this.Balance -= .10M;
             }
             while (this.Balance >= .05M)
             {
                 nickel++;
-                Balance -= .05M;
+                this.Balance -= .05M;
             }
             Console.WriteLine($"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s)");
         }
-
     }
 }
