@@ -11,7 +11,6 @@ namespace Capstone
         {
             Transactions transaction = new Transactions();
             Menu menu = new Menu();
-            //Menu.GetMenu();
 
             string mainMenuChoice;
             do
@@ -97,26 +96,6 @@ namespace Capstone
                                     {
                                         Console.WriteLine("Item location code not found. Please try again.\n");
                                     }
-
-                                    /*if (menu.ItemAvailability(selection))
-                                    {
-                                        if (transaction.PurchaseItem(menu.ItemMenu[selection].Price))
-                                        {
-                                            menu.ItemMenu[selection].Quantity--;
-
-                                            Console.WriteLine($"Dispensing {menu.ItemMenu[selection].ProductName} for " +
-                                                $"{menu.ItemMenu[selection].Price.ToString("C")}");
-
-                                            menu.ItemMessage(selection);
-
-                                            Console.WriteLine($"Remaining Balance: {transaction.Balance.ToString("C")}\n");
-
-                                            sw.WriteLine($"{DateTime.Now} {menu.ItemMenu[selection].ProductName} " +
-                                                $"{menu.ItemMenu[selection].SlotLocation} " +
-                                                $"{(transaction.Balance + menu.ItemMenu[selection].Price).ToString("C")} " +
-                                                $"{transaction.Balance.ToString("C")}");
-                                        }
-                                    }*/
                                 }
 
                             } while (purchaseChoice != "3");
