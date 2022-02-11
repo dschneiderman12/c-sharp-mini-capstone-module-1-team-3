@@ -25,7 +25,7 @@ namespace Capstone
             }
             else
             {
-                Console.Write("Please enter a whole dollar amount: ");
+                Console.WriteLine("Invalid entry. Please enter a whole dollar amount.\n");
             }
         }
 

@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Capstone
 {
-    public class Menu : IMenuable
+    public class Menu
     {
         private static Dictionary<string, Item> itemMenu = new Dictionary<string, Item>();
         public Dictionary<string, Item> ItemMenu
@@ -20,7 +20,7 @@ namespace Capstone
             string directory = Environment.CurrentDirectory;
             string file = "vendingmachine.csv";
             string menuFile = Path.Combine(directory, file);
-       
+
             try
             {
                 using (StreamReader sr = new StreamReader(menuFile))
@@ -30,7 +30,7 @@ namespace Capstone
                         string line = sr.ReadLine();
                         string[] lineArray = line.Split("|");
                         decimal price = decimal.Parse(lineArray[2]);
-       
+
                         Item newItem = new Item(lineArray[0], lineArray[1], price, lineArray[3]);
                         itemMenu[lineArray[0]] = newItem;
                     }
@@ -42,6 +42,7 @@ namespace Capstone
             }
             return itemMenu;
         }
+
         /// <summary>
         /// Prints items, their locations(item codes), prices, and remaining quantity of each
         /// </summary>
@@ -49,7 +50,7 @@ namespace Capstone
         {
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
-                Console.WriteLine($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining.");
+                Console.WriteLine($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
             }
             Console.WriteLine();
         }
@@ -74,7 +75,7 @@ namespace Capstone
         {
             if (ItemMenu[userSelection].Type == "Chip")
             {
-               return "Crunch Crunch, Yum!";
+                return "Crunch Crunch, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Candy")
             {
@@ -89,6 +90,61 @@ namespace Capstone
                 return "Chew Chew, Yum!";
             }
             return "";
+        }
+
+
+        private void CalculateSales()
+        {
+            string directory = Environment.CurrentDirectory;
+            string file = "Log.txt";
+            string logFile = Path.Combine(directory, file);
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(logFile))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        foreach (KeyValuePair<string, Item> kvp in ItemMenu)
+                        {
+                            if (line.Contains(kvp.Key))
+                            {
+                                kvp.Value.NumberSold++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void SalesReport()
+        {
+            CalculateSales();
+
+            string directory = Environment.CurrentDirectory;
+            string file = $"Sales Report {DateTime.Now.ToString("MM-dd-yyyy HH.mm.ss")}.txt";
+            string logFile = Path.Combine(directory, file);
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(logFile, false))
+                {
+                    foreach (KeyValuePair<string, Item> kvp in ItemMenu)
+                    {
+                        sw.WriteLine($"{kvp.Value.ProductName}|{kvp.Value.NumberSold}");
+                    }
+                }
+                Console.WriteLine("Sales report generated.\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

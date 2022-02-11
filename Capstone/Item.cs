@@ -11,6 +11,7 @@ namespace Capstone
         public decimal Price { get; set; }
         public string Type { get; set; }
         public int Quantity { get; set; } = 5;
+        public int NumberSold { get; set; }
 
         public Item()
         {

@@ -12,6 +12,7 @@ namespace Capstone
             Transactions transaction = new Transactions();
             Menu menu = new Menu();
             Menu.GetMenu();
+
             string mainMenuChoice;
             do
             {
@@ -118,6 +119,21 @@ namespace Capstone
                 if (mainMenuChoice == "3")
                 {
                     Console.WriteLine("Thanks for shopping with us! Have a great day!\n");
+                }
+
+                if (mainMenuChoice == "4")
+                {
+                    Console.Write("Please enter password for sales report: ");
+                    string password = Console.ReadLine();
+                    Console.WriteLine();
+                    if (password == "Interpolation")
+                    {
+                        menu.SalesReport();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Password incorrect.\n");
+                    }
                 }
 
             } while (mainMenuChoice != "3");
