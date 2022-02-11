@@ -78,6 +78,7 @@ namespace Capstone
                                                     $"{menu.ItemMenu[selection].Price.ToString("C")}");
 
                                                 Console.WriteLine(menu.ItemMessage(selection));
+                                                Console.WriteLine();
 
                                                 Console.WriteLine($"Remaining Balance: {transaction.Balance.ToString("C")}\n");
 
@@ -105,7 +106,7 @@ namespace Capstone
                         {
                             Console.WriteLine($"Your Remaining Balance is {transaction.Balance.ToString("C")}.");
                             sw.WriteLine($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
-                            transaction.GiveChange();
+                            Console.WriteLine(transaction.GiveChange());
                         }
                     }
                 }

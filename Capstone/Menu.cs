@@ -74,19 +74,19 @@ namespace Capstone
         {
             if (ItemMenu[userSelection].Type == "Chip")
             {
-               return "Crunch Crunch, Yum!\n";
+               return "Crunch Crunch, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Candy")
             {
-                return "Munch Munch, Yum!\n";
+                return "Munch Munch, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Drink")
             {
-                return "Glug Glug, Yum!\n";
+                return "Glug Glug, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Gum")
             {
-                return "Chew Chew, Yum!\n";
+                return "Chew Chew, Yum!";
             }
             return "";
         }

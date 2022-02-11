@@ -16,9 +16,11 @@ namespace Capstone
         {
             int wholeNumber;
             bool success = int.TryParse(moneyToFeed, out wholeNumber);
-            if (success)
+            if (success && wholeNumber > 0)
+
             {
                 decimal moneyAdd = decimal.Parse(moneyToFeed);
+
                 this.Balance = this.Balance += moneyAdd;
             }
             else
@@ -52,7 +54,7 @@ namespace Capstone
         /// <summary>
         /// Takes the remaining balance and provides change in quarters, dimes, and nickels using the fewest coins possible.
         /// </summary>
-        public void GiveChange()
+        public string GiveChange()
         {
             int quarter = 0;
             int dime = 0;
@@ -72,7 +74,7 @@ namespace Capstone
                 nickel++;
                 this.Balance -= .05M;
             }
-            Console.WriteLine($"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n");
+            return$"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n";
         }
     }
 }

@@ -12,22 +12,6 @@ namespace CapstoneTests
 
 
         [TestMethod]
-
-        public void PrintMenu_HappyPath()
-        {
-
-            //Arrage
-            Menu menu = new Menu();
-            Item item = new Item();
-            //   Dictionary<string, >
-
-
-            //Act
-
-
-            //Assert
-        }
-        [TestMethod]
         public void ItemExists_HappyPath()
         {
             //Arrange
@@ -59,14 +43,14 @@ namespace CapstoneTests
             Menu menu = new Menu();
             Item item = new Item();
             Menu.GetMenu();
-           
+
             menu.ItemMenu["A1"].Quantity = 0;
             string testInput = "A1";
             //Act
             bool result = menu.ItemAvailable(testInput);
             //Assert
             Assert.IsFalse(result);
-            
+
 
         }
         [TestMethod("ItemAvailable() should return true if an item quantity is greater than 0")]
@@ -87,9 +71,35 @@ namespace CapstoneTests
 
 
         }
+        [TestMethod]
+        public void ItemMessage_ChipStringTest()
+        {
+            Menu menu = new Menu();
+            Item item = new Item();
+            Menu.GetMenu();
 
 
+            string testInput = "A1";
+            //Act
+            string result = menu.ItemMessage(testInput);
+            //Assert
+            Assert.AreEqual("Crunch Crunch, Yum!", result);
+        }
+        [TestMethod]
+        public void ItemMessage_GumStringTest()
+        {
+            Menu menu = new Menu();
+            Item item = new Item();
+            Menu.GetMenu();
 
+
+            string testInput = "D4";
+            //Act
+            string result = menu.ItemMessage(testInput);
+            //Assert
+            Assert.AreEqual("Chew Chew, Yum!", result);
+
+        }
 
 
 
