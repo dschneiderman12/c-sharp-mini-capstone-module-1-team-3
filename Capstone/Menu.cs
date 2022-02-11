@@ -1,20 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Capstone
 {
     public class Menu : IMenuable
     {
-        //private static Dictionary<string, Item> itemMenu = new Dictionary<string, Item>();
+        private static Dictionary<string, Item> itemMenu = new Dictionary<string, Item>();
         public Dictionary<string, Item> ItemMenu
         {
             get
             {
-                return IMenuable.GetMenu();
+                return itemMenu;
             }
         }
-
+        public static Dictionary<string, Item> GetMenu()
+        {
+            string directory = Environment.CurrentDirectory;
+            string file = "vendingmachine.csv";
+            string menuFile = Path.Combine(directory, file);
+       
+            try
+            {
+                using (StreamReader sr = new StreamReader(menuFile))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] lineArray = line.Split("|");
+                        decimal price = decimal.Parse(lineArray[2]);
+       
+                        Item newItem = new Item(lineArray[0], lineArray[1], price, lineArray[3]);
+                        itemMenu[lineArray[0]] = newItem;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return itemMenu;
+        }
         /// <summary>
         /// Prints items, their locations(item codes), prices, and remaining quantity of each
         /// </summary>
@@ -29,13 +56,13 @@ namespace Capstone
 
         public bool ItemExists(string itemLocation)
         {
-            bool exists = ItemMenu.ContainsKey(itemLocation) ? true : false;
+            bool exists = itemMenu.ContainsKey(itemLocation) ? true : false;
             return exists;
         }
 
         public bool ItemAvailable(string itemLocation)
         {
-            bool available = ItemMenu.ContainsKey(itemLocation) ? true : false;
+            bool available = ItemMenu[itemLocation].Quantity > 0 ? true : false;
             return available;
         }
 
@@ -43,24 +70,25 @@ namespace Capstone
         /// Provides an item message when purchased, depending on the type selected and matched in dictionary from the item code
         /// </summary>
         /// <param name="userSelection">Item code provided by user</param>
-        public void ItemMessage(string userSelection)
+        public string ItemMessage(string userSelection)
         {
             if (ItemMenu[userSelection].Type == "Chip")
             {
-                Console.WriteLine("Crunch Crunch, Yum!\n");
+               return "Crunch Crunch, Yum!\n";
             }
             else if (ItemMenu[userSelection].Type == "Candy")
             {
-                Console.WriteLine("Munch Munch, Yum!\n");
+                return "Munch Munch, Yum!\n";
             }
             else if (ItemMenu[userSelection].Type == "Drink")
             {
-                Console.WriteLine("Glug Glug, Yum!\n");
+                return "Glug Glug, Yum!\n";
             }
             else if (ItemMenu[userSelection].Type == "Gum")
             {
-                Console.WriteLine("Chew Chew, Yum!\n");
+                return "Chew Chew, Yum!\n";
             }
+            return "";
         }
     }
 }

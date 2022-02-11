@@ -11,7 +11,7 @@ namespace Capstone
         {
             Transactions transaction = new Transactions();
             Menu menu = new Menu();
-
+            Menu.GetMenu();
             string mainMenuChoice;
             do
             {
@@ -77,7 +77,7 @@ namespace Capstone
                                                 Console.WriteLine($"Dispensing {menu.ItemMenu[selection].ProductName} for " +
                                                     $"{menu.ItemMenu[selection].Price.ToString("C")}");
 
-                                                menu.ItemMessage(selection);
+                                                Console.WriteLine(menu.ItemMessage(selection));
 
                                                 Console.WriteLine($"Remaining Balance: {transaction.Balance.ToString("C")}\n");
 
