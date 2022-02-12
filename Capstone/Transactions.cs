@@ -12,20 +12,20 @@ namespace Capstone
         /// Accepts money from user and adds it to the balance, making sure the amount given is a whole number
         /// </summary>
         /// <param name="moneyToFeed">number input from user</param>
-        public void FeedMoney(string moneyToFeed)
+        public bool FeedMoney(string moneyToFeed)
         {
             int wholeNumber;
             bool success = int.TryParse(moneyToFeed, out wholeNumber);
             if (success && wholeNumber > 0)
-
             {
                 decimal moneyAdd = decimal.Parse(moneyToFeed);
-
                 this.Balance = this.Balance += moneyAdd;
+                return true;
             }
             else
             {
                 Console.WriteLine("Invalid entry. Please enter a whole dollar amount.\n");
+                return false;
             }
         }
 
@@ -38,7 +38,6 @@ namespace Capstone
         /// <returns>returns true if there is enough money for the item, or false if not</returns>
         public bool PurchaseItem(decimal price)
         {
-
             if (this.Balance >= price)
             {
                 this.Balance -= price;
@@ -74,7 +73,7 @@ namespace Capstone
                 nickel++;
                 this.Balance -= .05M;
             }
-            return$"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n";
+            return $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n";
         }
     }
 }

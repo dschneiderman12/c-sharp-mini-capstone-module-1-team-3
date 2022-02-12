@@ -5,9 +5,9 @@ using System.IO;
 
 namespace Capstone
 {
-    public class UserInterface //contains user interactions with the vending machine
+    public class UserInterface
     {
-        public static void MainMenu() //main menu displayed to user
+        public static void MainMenu()
         {
             Transactions transaction = new Transactions();
             Menu menu = new Menu();
@@ -20,7 +20,7 @@ namespace Capstone
                 Console.WriteLine("(2) Purchase");
                 Console.WriteLine("(3) Exit");
 
-                mainMenuChoice = Console.ReadLine(); // add 4 for hidden sales list
+                mainMenuChoice = Console.ReadLine();
                 Console.WriteLine();
 
                 if (mainMenuChoice == "1")
@@ -54,10 +54,12 @@ namespace Capstone
 
                                     string moneyInput = Console.ReadLine();
                                     Console.WriteLine();
-                                    transaction.FeedMoney(moneyInput);
-
-                                    Console.WriteLine($"Your balance is now {transaction.Balance.ToString("C")}\n");
-                                    sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
+                                    
+                                    if (transaction.FeedMoney(moneyInput))
+                                    {
+                                        sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
+                                    }
+                                    Console.WriteLine($"Your balance is {transaction.Balance.ToString("C")}\n");
                                 }
 
                                 if (purchaseChoice == "2")
