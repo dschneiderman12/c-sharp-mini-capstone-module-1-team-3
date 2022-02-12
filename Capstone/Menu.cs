@@ -48,9 +48,26 @@ namespace Capstone
         /// </summary>
         public void PrintMenu()
         {
+            int i = 0;
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
-                Console.WriteLine($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                if (i % 2 != 0)
+                {
+                  //  string space = " ";
+                  //  int withOfBox = 30;
+                    string result =($" {kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
+                    int length = result.Length;
+                    
+                    Console.WriteLine(result.PadLeft(length,));
+                    i++;
+                }
+                else
+                {
+                    string result = ( $"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
+                   
+                    Console.Write(result.PadRight(15));
+                    i++;
+                }
             }
             Console.WriteLine();
         }
@@ -71,23 +88,106 @@ namespace Capstone
         /// Provides an item message when purchased, depending on the type selected and matched in dictionary from the item code
         /// </summary>
         /// <param name="userSelection">Item code provided by user</param>
+        /// 
+
         public string ItemMessage(string userSelection)
         {
             if (ItemMenu[userSelection].Type == "Chip")
             {
-                return "Crunch Crunch, Yum!";
+                string directory = Environment.CurrentDirectory;
+                string file = "chips.txt";
+                string chipsPic = Path.Combine(directory, file);
+
+                try
+                {
+                    using (StreamReader sr = new StreamReader(chipsPic))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            Console.WriteLine(line);
+                        }
+                    }
+                    return "Crunch Crunch, Yum!";
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             else if (ItemMenu[userSelection].Type == "Candy")
             {
-                return "Munch Munch, Yum!";
+                string directory = Environment.CurrentDirectory;
+                string file = "candy.txt";
+                string candyPic = Path.Combine(directory, file);
+                try
+                {
+                    using (StreamReader sr = new StreamReader(candyPic))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            Console.WriteLine(line);
+                        }
+
+                    }
+                    return "Munch Munch, Yum!";
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             else if (ItemMenu[userSelection].Type == "Drink")
             {
-                return "Glug Glug, Yum!";
+                string directory = Environment.CurrentDirectory;
+                string file = "drink.txt";
+                string drinkPic = Path.Combine(directory, file);
+                
+                try
+                {
+                    using (StreamReader sr = new StreamReader(drinkPic))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            Console.WriteLine(line);
+                        }
+
+                    }
+                    return "Glug Glug, Yum!";
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+
             }
             else if (ItemMenu[userSelection].Type == "Gum")
             {
-                return "Chew Chew, Yum!";
+                string directory = Environment.CurrentDirectory;
+                string file = "Gum.txt";
+                string gumPic = Path.Combine(directory, file);
+                try
+                {
+                    using (StreamReader sr = new StreamReader(gumPic))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            Console.WriteLine(line);
+                        }
+
+                    }
+                    return "Chew Chew, Yum!";
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                
             }
             return "";
         }
