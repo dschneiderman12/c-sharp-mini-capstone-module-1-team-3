@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using System.Text;
 using System.IO;
 
@@ -120,9 +120,32 @@ namespace Capstone
 
                 if (mainMenuChoice == "3")
                 {
-                    Console.WriteLine("Thanks for shopping with us! Have a great day!\n");
-                }
+                    
+                    string directory2 = Environment.CurrentDirectory;
+                    string file2 = "applause.txt";
+                    string candyPic = Path.Combine(directory2, file2);
 
+                    try
+                    {
+                        using (StreamReader sr = new StreamReader(candyPic))
+                        {
+                            while (!sr.EndOfStream)
+                            {
+                                string line = sr.ReadLine();
+                                Console.WriteLine(line);
+                            }
+                        }
+                        
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
+                }
+                
+                
                 if (mainMenuChoice == "4")
                 {
                     Console.Write("Please enter password for sales report: ");
@@ -134,7 +157,13 @@ namespace Capstone
                     }
                     else
                     {
+                        
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        
                         Console.WriteLine("Password incorrect.\n");
+                        
+                        Console.ForegroundColor = ConsoleColor.White;
+                  
                     }
                 }
 

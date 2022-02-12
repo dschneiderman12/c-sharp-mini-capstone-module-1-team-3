@@ -53,58 +53,77 @@ namespace Capstone
         /// </summary>
         public void PrintMenu()
         {
+            string resultEvenTop = "";
+            string resultEvenBottom = "";
             int i = 0;
             string[] menuArray = new string[this.ItemMenu.Count];
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
-            { 
-                string result = ($"║{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
-                int length = 42;
-                int spacesNeeded = 43 - result.Length;
-                string spaces = "";
-                for (int j = 0; j < spacesNeeded; j++)
+            {
+                string resultLineTop = ($"║{kvp.Key}-{kvp.Value.ProductName}");
+                string resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                int length = 40;
+                int spacesNeededtop = 41 - resultLineTop.Length;
+                int spacesNeededBottom = 40 - resultLineBottom.Length;
+                string spacesTop = "";
+                string spacesBottom = "";
+                string resultOddTop = "";
+                string resultOddBottom = "";
+
+                for (int j = 0; j < spacesNeededtop; j++)
                 {
-                    spaces += " ";
+                    spacesTop += " ";
                 }
-                result = result + spaces + "║";
-            
-                { }
+                resultLineTop = resultLineTop + spacesTop+ "║";
+                for (int k = 0; k < spacesNeededBottom; k++)
+                {
+                    spacesBottom += " ";
+                }
+                resultLineBottom = "║"+ resultLineBottom + spacesBottom + "║";
                 //making the top of box
                 string topOfOurBox = "╔";
-                
+
                 for (int c = 0; c < length; c++)
                 {
-                    topOfOurBox+= "═";
+                    topOfOurBox += "═";
                 }
                 topOfOurBox += "╗";
-                //filling the box
-        
+
+
                 //bottom of our box
                 string bottomOfBox = "╚";
-               
+
                 for (int c = 0; c < length; c++)
                 {
-                    bottomOfBox+="═";
+                    bottomOfBox += "═";
                 }
-                bottomOfBox+=("╝");
+                bottomOfBox += ("╝");
+
 
                 if (i % 2 == 0)
                 {
-                    Console.WriteLine();
-                    Console.Write(topOfOurBox);
-                    Console.Write(topOfOurBox);
-                    Console.WriteLine();
-                    Console.Write(result);
-                    
+
+                    resultEvenTop = resultLineTop;
+                    resultEvenBottom = resultLineBottom;
                 }
-                else 
+
+
+                else
                 {
-                    Console.Write(result);
-                    Console.WriteLine();
-                    Console.Write(bottomOfBox + bottomOfBox);
+                    resultOddTop = resultLineTop;
+                    resultOddBottom = resultLineBottom;
+                //    Console.BackgroundColor = ConsoleColor.White;
+                //    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine(topOfOurBox + topOfOurBox);
+
+                    Console.WriteLine(resultEvenTop + resultOddTop);
+                    Console.WriteLine(resultEvenBottom + resultOddBottom);
+
+                    Console.WriteLine(bottomOfBox + bottomOfBox);
+                //    Console.BackgroundColor = ConsoleColor.Black;
+                //    Console.ForegroundColor = ConsoleColor.White;
                 }
                 i++;
-                
-               
+
             }
             Console.WriteLine();
         }
