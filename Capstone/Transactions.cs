@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Capstone
 {
-    public class Transactions
+    public class Transactions : IColorable
     {
         public decimal Balance { get; private set; }
 
@@ -16,18 +16,29 @@ namespace Capstone
         {
             int wholeNumber;
             bool success = int.TryParse(moneyToFeed, out wholeNumber);
-            if (success && wholeNumber > 0)
+            if (success && wholeNumber > 0 && wholeNumber < 101)
             {
                 decimal moneyAdd = decimal.Parse(moneyToFeed);
                 this.Balance = this.Balance += moneyAdd;
                 return true;
             }
+            else if (wholeNumber >= 101 && wholeNumber <= 10000)
+            {
+                IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n", ConsoleColor.Cyan);
+                return false;
+            }
+            else if (wholeNumber > 10000)
+            {
+                IColorable.Color($"Go buy your own machine.\n", ConsoleColor.Cyan);
+                return false;
+            }
             else
             {
-                Console.WriteLine("Invalid entry. Please enter a whole dollar amount.\n");
+                IColorable.Color("Invalid entry. Please enter a whole dollar amount.\n", ConsoleColor.Red);
                 return false;
             }
         }
+
 
         /// <summary>
         /// Checks that the price of the item selected is not more than the remaining balance, 
@@ -45,7 +56,7 @@ namespace Capstone
             }
             else
             {
-                Console.WriteLine("Insufficient funds.\n");
+                IColorable.Color("Insufficient funds.\n", ConsoleColor.Red);
                 return false;
             }
         }
@@ -55,6 +66,12 @@ namespace Capstone
         /// </summary>
         public string GiveChange()
         {
+            if (this.Balance == 0.00M)
+            {
+                IColorable.Color("No change to give.\n", ConsoleColor.DarkRed);
+                return "";
+            }
+
             int quarter = 0;
             int dime = 0;
             int nickel = 0;
@@ -73,7 +90,10 @@ namespace Capstone
                 nickel++;
                 this.Balance -= .05M;
             }
-            return $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n";
+            string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n";
+            IColorable.Color(change, ConsoleColor.Green);
+            return change;
         }
     }
 }
+

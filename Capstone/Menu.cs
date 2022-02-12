@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Capstone
 {
-    public class Menu
+    public class Menu : IColorable
     {
         private static Dictionary<string, Item> itemMenu = new Dictionary<string, Item>();
         public Dictionary<string, Item> ItemMenu
@@ -61,9 +61,9 @@ namespace Capstone
             {
                 string resultLineTop = ($"║{kvp.Key}-{kvp.Value.ProductName}");
                 string resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
-                int length = 40;
-                int spacesNeededtop = 41 - resultLineTop.Length;
-                int spacesNeededBottom = 40 - resultLineBottom.Length;
+                int length = 22;
+                int spacesNeededtop = 23 - resultLineTop.Length;
+                int spacesNeededBottom = 22 - resultLineBottom.Length;
                 string spacesTop = "";
                 string spacesBottom = "";
                 string resultOddTop = "";
@@ -73,12 +73,12 @@ namespace Capstone
                 {
                     spacesTop += " ";
                 }
-                resultLineTop = resultLineTop + spacesTop+ "║";
+                resultLineTop = resultLineTop + spacesTop + "║";
                 for (int k = 0; k < spacesNeededBottom; k++)
                 {
                     spacesBottom += " ";
                 }
-                resultLineBottom = "║"+ resultLineBottom + spacesBottom + "║";
+                resultLineBottom = "║" + resultLineBottom + spacesBottom + "║";
                 //making the top of box
                 string topOfOurBox = "╔";
 
@@ -87,7 +87,6 @@ namespace Capstone
                     topOfOurBox += "═";
                 }
                 topOfOurBox += "╗";
-
 
                 //bottom of our box
                 string bottomOfBox = "╚";
@@ -98,7 +97,6 @@ namespace Capstone
                 }
                 bottomOfBox += ("╝");
 
-
                 if (i % 2 == 0)
                 {
 
@@ -106,24 +104,22 @@ namespace Capstone
                     resultEvenBottom = resultLineBottom;
                 }
 
-
                 else
                 {
                     resultOddTop = resultLineTop;
                     resultOddBottom = resultLineBottom;
-                //    Console.BackgroundColor = ConsoleColor.White;
-                //    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    //Console.BackgroundColor = ConsoleColor.White;
+                    //Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine(topOfOurBox + topOfOurBox);
 
                     Console.WriteLine(resultEvenTop + resultOddTop);
                     Console.WriteLine(resultEvenBottom + resultOddBottom);
 
                     Console.WriteLine(bottomOfBox + bottomOfBox);
-                //    Console.BackgroundColor = ConsoleColor.Black;
-                //    Console.ForegroundColor = ConsoleColor.White;
+                    //Console.BackgroundColor = ConsoleColor.Black;
+                    //Console.ForegroundColor = ConsoleColor.White;
                 }
                 i++;
-
             }
             Console.WriteLine();
         }
@@ -146,8 +142,35 @@ namespace Capstone
         /// <returns>true if item is still in stock, false if it isn't</returns>
         public bool ItemAvailable(string itemLocation)
         {
-            bool available = ItemMenu[itemLocation].Quantity > 0 ? true : false;
+            bool available = itemMenu[itemLocation].Quantity > 0 ? true : false;
             return available;
+        }
+
+        /// <summary>
+        /// Pulls a picture file based on input txt file in ItemMessage method
+        /// </summary>
+        /// <param name="picFile">txt file for type of vending machine snack</param>
+        public void ItemPicture(string picFile)
+        {
+            string directory = Environment.CurrentDirectory;
+            string file = picFile;
+            string pic = Path.Combine(directory, file);
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(pic))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -159,97 +182,58 @@ namespace Capstone
         {
             if (ItemMenu[userSelection].Type == "Chip")
             {
-                string directory = Environment.CurrentDirectory;
-                string file = "chips.txt";
-                string chipsPic = Path.Combine(directory, file);
-
-                try
-                {
-                    using (StreamReader sr = new StreamReader(chipsPic))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            string line = sr.ReadLine();
-                            Console.WriteLine(line);
-                        }
-                    }
-                    return "Crunch Crunch, Yum!";
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                ItemPicture("chips.txt");
+                return "Crunch Crunch, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Candy")
             {
-                string directory = Environment.CurrentDirectory;
-                string file = "candy.txt";
-                string candyPic = Path.Combine(directory, file);
-
-                try
-                {
-                    using (StreamReader sr = new StreamReader(candyPic))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            string line = sr.ReadLine();
-                            Console.WriteLine(line);
-                        }
-                    }
-                    return "Munch Munch, Yum!";
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                ItemPicture("candy.txt");
+                return "Munch Munch, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Drink")
             {
-                string directory = Environment.CurrentDirectory;
-                string file = "drink.txt";
-                string drinkPic = Path.Combine(directory, file);
-
-                try
-                {
-                    using (StreamReader sr = new StreamReader(drinkPic))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            string line = sr.ReadLine();
-                            Console.WriteLine(line);
-                        }
-                    }
-                    return "Glug Glug, Yum!";
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                ItemPicture("drink.txt");
+                return "Glug Glug, Yum!";
             }
             else if (ItemMenu[userSelection].Type == "Gum")
             {
-                string directory = Environment.CurrentDirectory;
-                string file = "Gum.txt";
-                string gumPic = Path.Combine(directory, file);
-
-                try
-                {
-                    using (StreamReader sr = new StreamReader(gumPic))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            string line = sr.ReadLine();
-                            Console.WriteLine(line);
-                        }
-                    }
-                    return "Chew Chew, Yum!";
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                ItemPicture("gum.txt");
+                return "Chew Chew, Yum!";
             }
             return "";
+        }
+               
+        /// <summary>
+        /// Provides a goodbye message and picture once user exits the vending machine
+        /// </summary>
+        public void GoodbyeMessage()
+        {
+            string directory2 = Environment.CurrentDirectory;
+            string file2 = "applause.txt";
+            string candyPic = Path.Combine(directory2, file2);
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(candyPic))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine();
+            Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
+        }
+
+        public void ChangeArt()
+        {
+
         }
 
         /// <summary>

@@ -20,7 +20,7 @@
     <None Update="drink.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Gum.txt">
+    <None Update="gum.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="vendingmachine.csv">

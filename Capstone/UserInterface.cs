@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
 namespace Capstone
 {
-    public class UserInterface
+    public class UserInterface : IColorable
     {
         public static void MainMenu()
         {
@@ -43,7 +43,9 @@ namespace Capstone
                             {
                                 Console.WriteLine("(1) Feed Money");
                                 Console.WriteLine("(2) Select Product");
-                                Console.WriteLine("(3) Finish Transaction");
+                                Console.WriteLine("(3) Finish Transaction\n");
+
+                                IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n", ConsoleColor.Green);
 
                                 purchaseChoice = Console.ReadLine();
                                 Console.WriteLine();
@@ -54,12 +56,11 @@ namespace Capstone
 
                                     string moneyInput = Console.ReadLine();
                                     Console.WriteLine();
-                                    
+
                                     if (transaction.FeedMoney(moneyInput))
                                     {
                                         sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
                                     }
-                                    Console.WriteLine($"Your balance is {transaction.Balance.ToString("C")}\n");
                                 }
 
                                 if (purchaseChoice == "2")
@@ -83,8 +84,6 @@ namespace Capstone
                                                 Console.WriteLine(menu.ItemMessage(selection));
                                                 Console.WriteLine();
 
-                                                Console.WriteLine($"Remaining Balance: {transaction.Balance.ToString("C")}\n");
-
                                                 sw.WriteLine($"{DateTime.Now} {menu.ItemMenu[selection].ProductName} " +
                                                     $"{menu.ItemMenu[selection].SlotLocation} " +
                                                     $"{(transaction.Balance + menu.ItemMenu[selection].Price).ToString("C")} " +
@@ -93,23 +92,26 @@ namespace Capstone
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Sold Out :( Try again later!\n");
+                                            IColorable.Color("Sold Out :( Try again later!\n", ConsoleColor.Red);
                                         }
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Item location code not found. Please try again.\n");
+                                        IColorable.Color("Item location code not found. Please try again.\n", ConsoleColor.Red);
                                     }
+                                }
+                                else if (purchaseChoice != "1" && purchaseChoice != "2" && purchaseChoice != "3")
+                                {
+                                    IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n", ConsoleColor.Red);
                                 }
 
                             } while (purchaseChoice != "3");
                         }
-
                         if (purchaseChoice == "3")
                         {
-                            Console.WriteLine($"Your Remaining Balance is {transaction.Balance.ToString("C")}.");
+                            Console.WriteLine($"Your remaining balance is {transaction.Balance.ToString("C")}.");
                             sw.WriteLine($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
-                            Console.WriteLine(transaction.GiveChange());
+                            transaction.GiveChange();
                         }
                     }
                 }
@@ -120,32 +122,9 @@ namespace Capstone
 
                 if (mainMenuChoice == "3")
                 {
-                    
-                    string directory2 = Environment.CurrentDirectory;
-                    string file2 = "applause.txt";
-                    string candyPic = Path.Combine(directory2, file2);
-
-                    try
-                    {
-                        using (StreamReader sr = new StreamReader(candyPic))
-                        {
-                            while (!sr.EndOfStream)
-                            {
-                                string line = sr.ReadLine();
-                                Console.WriteLine(line);
-                            }
-                        }
-                        
-                    }
-                    catch (IOException ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                    Console.WriteLine();
-                    Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
+                    menu.GoodbyeMessage();
                 }
-                
-                
+
                 if (mainMenuChoice == "4")
                 {
                     Console.Write("Please enter password for sales report: ");
@@ -157,14 +136,12 @@ namespace Capstone
                     }
                     else
                     {
-                        
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        
-                        Console.WriteLine("Password incorrect.\n");
-                        
-                        Console.ForegroundColor = ConsoleColor.White;
-                  
+                        IColorable.Color("Password incorrect.\n", ConsoleColor.Red);
                     }
+                }
+                else if (mainMenuChoice != "1" && mainMenuChoice != "2" && mainMenuChoice != "3" && mainMenuChoice != "4")
+                {
+                    IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n", ConsoleColor.Red);
                 }
 
             } while (mainMenuChoice != "3");
