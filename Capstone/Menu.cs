@@ -15,6 +15,11 @@ namespace Capstone
                 return itemMenu;
             }
         }
+
+        /// <summary>
+        /// pulls menu from the vendingmachine.csv file, separates item properties, and puts into private backing field for an item menu dictionary
+        /// </summary>
+        /// <returns>dictionary with items and their individual properties - Item code as key, item as value</returns>
         public static Dictionary<string, Item> GetMenu()
         {
             string directory = Environment.CurrentDirectory;
@@ -53,18 +58,18 @@ namespace Capstone
             {
                 if (i % 2 != 0)
                 {
-                  //  string space = " ";
-                  //  int withOfBox = 30;
-                    string result =($" {kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
+                    //  string space = " ";
+                    //  int withOfBox = 30;
+                    string result = ($" {kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
                     int length = result.Length;
-                    
+
                     Console.WriteLine(result.PadLeft(length));
                     i++;
                 }
                 else
                 {
-                    string result = ( $"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
-                   
+                    string result = ($"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+
                     Console.Write(result.PadRight(15));
                     i++;
                 }
@@ -72,12 +77,22 @@ namespace Capstone
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// checks to see if a user input is a valid item code
+        /// </summary>
+        /// <param name="itemLocation">Item code provided by user</param>
+        /// <returns>true if code exists, false if it doesn't</returns>
         public bool ItemExists(string itemLocation)
         {
             bool exists = itemMenu.ContainsKey(itemLocation) ? true : false;
             return exists;
         }
 
+        /// <summary>
+        /// checks to see if the confirmed user input code still has the item left in stock
+        /// </summary>
+        /// <param name="itemLocation">Item code provided by userr</param>
+        /// <returns>true if item is still in stock, false if it isn't</returns>
         public bool ItemAvailable(string itemLocation)
         {
             bool available = ItemMenu[itemLocation].Quantity > 0 ? true : false;
@@ -85,11 +100,10 @@ namespace Capstone
         }
 
         /// <summary>
-        /// Provides an item message when purchased, depending on the type selected and matched in dictionary from the item code
+        /// Provides an item message and picture when purchased, depending on the type selected and matched in dictionary from the item code
         /// </summary>
         /// <param name="userSelection">Item code provided by user</param>
         /// 
-
         public string ItemMessage(string userSelection)
         {
             if (ItemMenu[userSelection].Type == "Chip")
@@ -120,6 +134,7 @@ namespace Capstone
                 string directory = Environment.CurrentDirectory;
                 string file = "candy.txt";
                 string candyPic = Path.Combine(directory, file);
+
                 try
                 {
                     using (StreamReader sr = new StreamReader(candyPic))
@@ -129,7 +144,6 @@ namespace Capstone
                             string line = sr.ReadLine();
                             Console.WriteLine(line);
                         }
-
                     }
                     return "Munch Munch, Yum!";
                 }
@@ -143,7 +157,7 @@ namespace Capstone
                 string directory = Environment.CurrentDirectory;
                 string file = "drink.txt";
                 string drinkPic = Path.Combine(directory, file);
-                
+
                 try
                 {
                     using (StreamReader sr = new StreamReader(drinkPic))
@@ -153,7 +167,6 @@ namespace Capstone
                             string line = sr.ReadLine();
                             Console.WriteLine(line);
                         }
-
                     }
                     return "Glug Glug, Yum!";
                 }
@@ -161,14 +174,13 @@ namespace Capstone
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-
             }
             else if (ItemMenu[userSelection].Type == "Gum")
             {
                 string directory = Environment.CurrentDirectory;
                 string file = "Gum.txt";
                 string gumPic = Path.Combine(directory, file);
+
                 try
                 {
                     using (StreamReader sr = new StreamReader(gumPic))
@@ -178,7 +190,6 @@ namespace Capstone
                             string line = sr.ReadLine();
                             Console.WriteLine(line);
                         }
-
                     }
                     return "Chew Chew, Yum!";
                 }
@@ -186,13 +197,13 @@ namespace Capstone
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-                
             }
             return "";
         }
 
-
+        /// <summary>
+        /// Calculates total number of each item sold from the log
+        /// </summary>
         private void CalculateSales()
         {
             string directory = Environment.CurrentDirectory;
@@ -222,6 +233,9 @@ namespace Capstone
             }
         }
 
+        /// <summary>
+        /// takes the total number of each item sold and writes the item names and totals into a new txt file created at the time this is run
+        /// </summary>
         public void SalesReport()
         {
             CalculateSales();
