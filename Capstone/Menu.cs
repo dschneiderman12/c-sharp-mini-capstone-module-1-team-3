@@ -49,25 +49,57 @@ namespace Capstone
         public void PrintMenu()
         {
             int i = 0;
+            string[] menuArray = new string[this.ItemMenu.Count];
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
-            {
-                if (i % 2 != 0)
+            { 
+                string result = ($"║{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                int length = 42;
+                int spacesNeeded = 43 - result.Length;
+                string spaces = "";
+                for (int j = 0; j < spacesNeeded; j++)
                 {
-                  //  string space = " ";
-                  //  int withOfBox = 30;
-                    string result =($" {kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
-                    int length = result.Length;
+                    spaces += " ";
+                }
+                result = result + spaces + "║";
+            
+                { }
+                //making the top of box
+                string topOfOurBox = "╔";
+                
+                for (int c = 0; c < length; c++)
+                {
+                    topOfOurBox+= "═";
+                }
+                topOfOurBox += "╗";
+                //filling the box
+        
+                //bottom of our box
+                string bottomOfBox = "╚";
+               
+                for (int c = 0; c < length; c++)
+                {
+                    bottomOfBox+="═";
+                }
+                bottomOfBox+=("╝");
+
+                if (i % 2 == 0)
+                {
+                    Console.WriteLine();
+                    Console.Write(topOfOurBox);
+                    Console.Write(topOfOurBox);
+                    Console.WriteLine();
+                    Console.Write(result);
                     
-                    Console.WriteLine(result.PadLeft(length));
-                    i++;
                 }
-                else
+                else 
                 {
-                    string result = ( $"{kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
-                   
-                    Console.Write(result.PadRight(15));
-                    i++;
+                    Console.Write(result);
+                    Console.WriteLine();
+                    Console.Write(bottomOfBox + bottomOfBox);
                 }
+                i++;
+                
+               
             }
             Console.WriteLine();
         }
@@ -143,7 +175,7 @@ namespace Capstone
                 string directory = Environment.CurrentDirectory;
                 string file = "drink.txt";
                 string drinkPic = Path.Combine(directory, file);
-                
+
                 try
                 {
                     using (StreamReader sr = new StreamReader(drinkPic))
@@ -187,7 +219,7 @@ namespace Capstone
                     Console.WriteLine(ex.Message);
                 }
 
-                
+
             }
             return "";
         }
