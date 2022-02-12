@@ -58,7 +58,7 @@ namespace Capstone
                     string result =($" {kvp.Key}-{kvp.Value.ProductName} {kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining" );
                     int length = result.Length;
                     
-                    Console.WriteLine(result.PadLeft(length,));
+                    Console.WriteLine(result.PadLeft(length));
                     i++;
                 }
                 else
