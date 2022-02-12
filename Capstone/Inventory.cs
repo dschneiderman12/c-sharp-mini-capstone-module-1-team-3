@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Capstone
 {
-    public class Menu : IColorable
+    public class Inventory : IColorable
     {
         private static Dictionary<string, Item> itemMenu = new Dictionary<string, Item>();
         public Dictionary<string, Item> ItemMenu
@@ -59,22 +59,19 @@ namespace Capstone
             string[] menuArray = new string[this.ItemMenu.Count];
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
-                string resultLineTop = ($"║{kvp.Key}-{kvp.Value.ProductName}");
-                
-                
+                string resultLineTop = ($"{kvp.Key}-{kvp.Value.ProductName}");
+
                 string resultLineBottom = "";
                 if (kvp.Value.Quantity == 0)
                 {
-                    
                     resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, SOLD OUT");
-                    
                 }
                 else
                 {
                     resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
                 }
                 int length = 22;
-                int spacesNeededTop = 23 - resultLineTop.Length;
+                int spacesNeededTop = 22 - resultLineTop.Length;
                 int spacesNeededBottom = 22 - resultLineBottom.Length;
                 string spacesTop = "";
                 string spacesBottom = "";
@@ -85,12 +82,12 @@ namespace Capstone
                 {
                     spacesTop += " ";
                 }
-                resultLineTop = resultLineTop + spacesTop + "║";
+                resultLineTop = resultLineTop + spacesTop;
                 for (int k = 0; k < spacesNeededBottom; k++)
                 {
                     spacesBottom += " ";
                 }
-                resultLineBottom = "║" + resultLineBottom + spacesBottom + "║";
+                resultLineBottom = resultLineBottom + spacesBottom;
                 //making the top of box
                 string topOfOurBox = "╔";
 
@@ -111,7 +108,6 @@ namespace Capstone
 
                 if (i % 2 == 0)
                 {
-
                     resultEvenTop = resultLineTop;
                     resultEvenBottom = resultLineBottom;
                 }
@@ -120,16 +116,28 @@ namespace Capstone
                 {
                     resultOddTop = resultLineTop;
                     resultOddBottom = resultLineBottom;
-                    //Console.BackgroundColor = ConsoleColor.White;
-                    //Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine(topOfOurBox + topOfOurBox);
 
-                    Console.WriteLine(resultEvenTop + resultOddTop);
-                    Console.WriteLine(resultEvenBottom + resultOddBottom);
+                    IColorable.Color(topOfOurBox + topOfOurBox, ConsoleColor.DarkMagenta);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine();
+                    Console.Write("║");
+                    IColorable.Color(resultEvenTop, ConsoleColor.DarkYellow);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write("║║");
+                    IColorable.Color(resultOddTop, ConsoleColor.DarkYellow);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("║");
 
-                    Console.WriteLine(bottomOfBox + bottomOfBox);
-                    //Console.BackgroundColor = ConsoleColor.Black;
-                    //Console.ForegroundColor = ConsoleColor.White;
+
+                    Console.Write("║");
+                    IColorable.Color(resultEvenBottom, ConsoleColor.DarkYellow);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write("║║");
+                    IColorable.Color(resultOddBottom, ConsoleColor.DarkYellow);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("║");
+                    IColorable.Color(bottomOfBox + bottomOfBox, ConsoleColor.DarkMagenta);
+                    Console.WriteLine();
                 }
                 i++;
             }
@@ -156,80 +164,6 @@ namespace Capstone
         {
             bool available = itemMenu[itemLocation].Quantity > 0 ? true : false;
             return available;
-        }
-
-        /// <summary>
-        /// Pulls a picture file based on input txt file in ItemMessage method
-        /// </summary>
-        /// <param name="picFile">txt file for type of vending machine snack</param>
-        public void ItemPicture(string picFile)
-        {
-            string directory = Environment.CurrentDirectory;
-            string file = picFile;
-            string pic = Path.Combine(directory, file);
-
-            try
-            {
-                using (StreamReader sr = new StreamReader(pic))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        Console.WriteLine(line);
-                    }
-                }
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Provides an item message and picture when purchased, depending on the type selected and matched in dictionary from the item code
-        /// </summary>
-        /// <param name="userSelection">Item code provided by user</param>
-        /// 
-        public string ItemMessage(string userSelection)
-        {
-            if (ItemMenu[userSelection].Type == "Chip")
-            {
-                ItemPicture("chips.txt");
-                return "Crunch Crunch, Yum!";
-            }
-            else if (ItemMenu[userSelection].Type == "Candy")
-            {
-                ItemPicture("candy.txt");
-                return "Munch Munch, Yum!";
-            }
-            else if (ItemMenu[userSelection].Type == "Drink")
-            {
-                ItemPicture("drink.txt");
-                return "Glug Glug, Yum!";
-            }
-            else if (ItemMenu[userSelection].Type == "Gum")
-            {
-                ItemPicture("gum.txt");
-                return "Chew Chew, Yum!";
-            }
-            return "";
-        }
-               
-        /// <summary>
-        /// Provides a goodbye message and picture once user exits the vending machine
-        /// </summary>
-        /// 
-        public void GoodbyeMessage()
-        {
-            ItemPicture("applause.txt");
-         
-            Console.WriteLine();
-            Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
-        }
-
-        public void ChangeArt()
-        {
-
         }
 
         /// <summary>

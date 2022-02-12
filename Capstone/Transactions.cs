@@ -24,21 +24,20 @@ namespace Capstone
             }
             else if (wholeNumber >= 101 && wholeNumber <= 10000)
             {
-                IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n", ConsoleColor.Cyan);
+                IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n\n", ConsoleColor.Cyan);
                 return false;
             }
             else if (wholeNumber > 10000)
             {
-                IColorable.Color($"Go buy your own machine.\n", ConsoleColor.Cyan);
+                IColorable.Color($"Go buy your own machine.\n\n", ConsoleColor.Cyan);
                 return false;
             }
             else
             {
-                IColorable.Color("Invalid entry. Please enter a whole dollar amount.\n", ConsoleColor.Red);
+                IColorable.Color("Invalid entry. Please enter a whole dollar amount.\n\n", ConsoleColor.Red);
                 return false;
             }
         }
-
 
         /// <summary>
         /// Checks that the price of the item selected is not more than the remaining balance, 
@@ -56,7 +55,7 @@ namespace Capstone
             }
             else
             {
-                IColorable.Color("Insufficient funds.\n", ConsoleColor.Red);
+                IColorable.Color("Insufficient funds.\n\n", ConsoleColor.Red);
                 return false;
             }
         }
@@ -68,8 +67,8 @@ namespace Capstone
         {
             if (this.Balance == 0.00M)
             {
-                IColorable.Color("No change to give.\n", ConsoleColor.DarkRed);
-                return "";
+                IColorable.Color("No change to give.\n\n", ConsoleColor.DarkRed);
+                return "Nice try.";
             }
 
             int quarter = 0;
@@ -90,7 +89,7 @@ namespace Capstone
                 nickel++;
                 this.Balance -= .05M;
             }
-            string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n";
+            string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n\n";
             IColorable.Color(change, ConsoleColor.Green);
             return change;
         }

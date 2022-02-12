@@ -5,15 +5,18 @@ using System.IO;
 
 namespace Capstone
 {
-    public class Art
+    public class ArtMessages
     {
-        Menu menu = new Menu();
-        
-        public void ItemPicture(string picFile)
+        Inventory menu = new Inventory();
+
+        /// <summary>
+        /// Pulls a picture file based on input txt file
+        /// </summary>
+        /// <param name="picFile">ASCII art text file</param>
+        public void GetPicture(string picFile)
         {
-            
             string directory = Environment.CurrentDirectory;
-            string file = picFile;
+            string file = @"ASCII\" + picFile;
             string pic = Path.Combine(directory, file);
 
             try
@@ -32,40 +35,48 @@ namespace Capstone
                 Console.WriteLine(ex.Message);
             }
         }
-
+                       
         /// <summary>
         /// Provides an item message and picture when purchased, depending on the type selected and matched in dictionary from the item code
         /// </summary>
         /// <param name="userSelection">Item code provided by user</param>
         /// 
-       /* public string ItemMessage(string userSelection)
+        public string ItemMessage(string userSelection)
         {
-            
-            
             if (menu.ItemMenu[userSelection].Type == "Chip")
             {
-                ItemPicture("chips.txt");
+                GetPicture("chips.txt");
                 return "Crunch Crunch, Yum!";
             }
-            else if (ItemMenu[userSelection].Type == "Candy")
+            else if (menu.ItemMenu[userSelection].Type == "Candy")
             {
-                ItemPicture("candy.txt");
+                GetPicture("candy.txt");
                 return "Munch Munch, Yum!";
             }
-            else if (ItemMenu[userSelection].Type == "Drink")
+            else if (menu.ItemMenu[userSelection].Type == "Drink")
             {
-                ItemPicture("drink.txt");
+                GetPicture("drink.txt");
                 return "Glug Glug, Yum!";
             }
-            else if (ItemMenu[userSelection].Type == "Gum")
+            else if (menu.ItemMenu[userSelection].Type == "Gum")
             {
-                ItemPicture("gum.txt");
+                GetPicture("gum.txt");
                 return "Chew Chew, Yum!";
             }
             return "";
-        }*/
+        }
 
+        /// <summary>
+        /// Provides a goodbye message and picture once user exits the vending machine
+        /// </summary>
+        /// 
+        public void GoodbyeMessage()
+        {
+            GetPicture("applause.txt");
 
+            Console.WriteLine();
+            Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
+        }
 
     }
 }

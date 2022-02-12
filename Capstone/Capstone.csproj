@@ -8,25 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="applause.txt">
+    <None Update="ASCII\applause.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="candy.txt">
+    <None Update="ASCII\candy.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="chips.txt">
+    <None Update="ASCII\chips.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="drink.txt">
+    <None Update="ASCII\drink.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="gum.txt">
+    <None Update="ASCII\gum.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="vendingmachine.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="welcome.txt">
+    <None Update="ASCII\welcome.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -13,8 +13,8 @@ namespace CapstoneTests
         public void ItemExists_HappyPath()
         {
             //Arrange
-            Menu menu = new Menu();
-            Menu.GetMenu();
+            Inventory menu = new Inventory();
+            Inventory.GetMenu();
             string testInput = "A1";
 
             //Act
@@ -28,8 +28,8 @@ namespace CapstoneTests
         public void ItemExists_FalseTest()
         {
             //Arrange
-            Menu menu = new Menu();
-            Menu.GetMenu();
+            Inventory menu = new Inventory();
+            Inventory.GetMenu();
             string testInput = "A6";
 
             //Act
@@ -43,9 +43,9 @@ namespace CapstoneTests
         public void ItemAvailable_OutOfStockTest()
         {
             //Arrange
-            Menu menu = new Menu();
+            Inventory menu = new Inventory();
             Item item = new Item();
-            Menu.GetMenu();
+            Inventory.GetMenu();
 
             menu.ItemMenu["A1"].Quantity = 0;
             string testInput = "A1";
@@ -62,9 +62,9 @@ namespace CapstoneTests
         public void ItemAvailable_InStockTest()
         {
             //Arrange
-            Menu menu = new Menu();
+            Inventory menu = new Inventory();
             Item item = new Item();
-            Menu.GetMenu();
+            Inventory.GetMenu();
 
             menu.ItemMenu["A1"].Quantity = 1;
             string testInput = "A1";
@@ -78,13 +78,14 @@ namespace CapstoneTests
         [TestMethod]
         public void ItemMessage_ChipStringTest()
         {
-            Menu menu = new Menu();
+            Inventory menu = new Inventory();
             Item item = new Item();
-            Menu.GetMenu();
+            ArtMessages art = new ArtMessages();
+            Inventory.GetMenu();
             string testInput = "A1";
 
             //Act
-            string result = menu.ItemMessage(testInput);
+            string result = art.ItemMessage(testInput);
 
             //Assert
             Assert.AreEqual("Crunch Crunch, Yum!", result);
@@ -93,13 +94,14 @@ namespace CapstoneTests
         [TestMethod]
         public void ItemMessage_GumStringTest()
         {
-            Menu menu = new Menu();
+            Inventory menu = new Inventory();
             Item item = new Item();
-            Menu.GetMenu();
+            ArtMessages art = new ArtMessages();
+            Inventory.GetMenu();
             string testInput = "D4";
 
             //Act
-            string result = menu.ItemMessage(testInput);
+            string result = art.ItemMessage(testInput);
 
             //Assert
             Assert.AreEqual("Chew Chew, Yum!", result);

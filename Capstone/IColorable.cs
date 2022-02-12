@@ -9,7 +9,7 @@ namespace Capstone
         public static void Color(string message, ConsoleColor color)
         {                                      
             Console.ForegroundColor = color;
-            Console.WriteLine(message);
+            Console.Write(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

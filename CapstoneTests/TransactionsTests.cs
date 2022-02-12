@@ -105,7 +105,7 @@ namespace CapstoneTests
             Transactions transactions = new Transactions();
             transactions.FeedMoney("4");
             transactions.PurchaseItem(2.55M);
-            string expectedString = "Dispensing: 5 Quarter(s), 2 Dime(s), 0 Nickel(s).\n";
+            string expectedString = "Dispensing: 5 Quarter(s), 2 Dime(s), 0 Nickel(s).\n\n";
 
             //Act
             string result = transactions.GiveChange();
@@ -122,7 +122,22 @@ namespace CapstoneTests
             Transactions transactions = new Transactions();
             transactions.FeedMoney("1");
             transactions.PurchaseItem(0.85M);
-            string expectedString = "Dispensing: 0 Quarter(s), 1 Dime(s), 1 Nickel(s).\n";
+            string expectedString = "Dispensing: 0 Quarter(s), 1 Dime(s), 1 Nickel(s).\n\n";
+
+            //Act
+            string result = transactions.GiveChange();
+
+            //Assert
+            Assert.AreEqual(expectedString, result);
+            Assert.AreEqual(transactions.Balance, 0.00M);
+        }
+
+        [TestMethod]
+        public void GiveChange_ZeroBalance()
+        {
+            //Arrange
+            Transactions transactions = new Transactions();
+            string expectedString = "Nice try.";
 
             //Act
             string result = transactions.GiveChange();
@@ -132,4 +147,5 @@ namespace CapstoneTests
             Assert.AreEqual(transactions.Balance, 0.00M);
         }
     }
+
 }
