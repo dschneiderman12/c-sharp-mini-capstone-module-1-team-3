@@ -16,6 +16,7 @@ namespace Capstone
             string mainMenuChoice;
             do
             {
+
                 Console.WriteLine("(1) Display Vending Machine Items");
                 Console.WriteLine("(2) Purchase");
                 Console.WriteLine("(3) Exit");
@@ -25,6 +26,7 @@ namespace Capstone
 
                 if (mainMenuChoice == "1")
                 {
+
                     menu.PrintMenu();
                 }
 

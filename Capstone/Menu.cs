@@ -60,16 +60,28 @@ namespace Capstone
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
                 string resultLineTop = ($"║{kvp.Key}-{kvp.Value.ProductName}");
-                string resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                
+                
+                string resultLineBottom = "";
+                if (kvp.Value.Quantity == 0)
+                {
+                    
+                    resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, SOLD OUT");
+                    
+                }
+                else
+                {
+                    resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                }
                 int length = 22;
-                int spacesNeededtop = 23 - resultLineTop.Length;
+                int spacesNeededTop = 23 - resultLineTop.Length;
                 int spacesNeededBottom = 22 - resultLineBottom.Length;
                 string spacesTop = "";
                 string spacesBottom = "";
                 string resultOddTop = "";
                 string resultOddBottom = "";
 
-                for (int j = 0; j < spacesNeededtop; j++)
+                for (int j = 0; j < spacesNeededTop; j++)
                 {
                     spacesTop += " ";
                 }
