@@ -11,7 +11,7 @@ namespace Capstone
         
         public void ItemPicture(string picFile)
         {
-            Menu.GetMenu();
+            
             string directory = Environment.CurrentDirectory;
             string file = picFile;
             string pic = Path.Combine(directory, file);

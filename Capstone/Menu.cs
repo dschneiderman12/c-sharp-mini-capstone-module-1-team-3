@@ -218,27 +218,11 @@ namespace Capstone
         /// <summary>
         /// Provides a goodbye message and picture once user exits the vending machine
         /// </summary>
+        /// 
         public void GoodbyeMessage()
         {
-            string directory2 = Environment.CurrentDirectory;
-            string file2 = "applause.txt";
-            string candyPic = Path.Combine(directory2, file2);
-
-            try
-            {
-                using (StreamReader sr = new StreamReader(candyPic))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        Console.WriteLine(line);
-                    }
-                }
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            ItemPicture("applause.txt");
+         
             Console.WriteLine();
             Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
         }

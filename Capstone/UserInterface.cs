@@ -12,6 +12,7 @@ namespace Capstone
             Transactions transaction = new Transactions();
             Menu menu = new Menu();
             Menu.GetMenu();
+            menu.ItemPicture("welcome.txt");
 
             string mainMenuChoice;
             do
