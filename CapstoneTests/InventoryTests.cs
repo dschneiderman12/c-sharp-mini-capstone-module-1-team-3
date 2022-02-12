@@ -7,7 +7,7 @@ using Capstone;
 namespace CapstoneTests
 {
     [TestClass]
-    public class MenuTests
+    public class InventoryTests
     {
         [TestMethod]
         public void ItemExists_HappyPath()
