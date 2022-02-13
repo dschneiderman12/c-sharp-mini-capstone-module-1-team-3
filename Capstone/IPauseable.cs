@@ -12,18 +12,18 @@ namespace Capstone
         }
         public static void shortPause()
         {
-            Thread.Sleep(800);
+            Thread.Sleep(400);
         }
         public static void pauseWithRedirect()
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             Console.WriteLine();
             Console.Write("Redirecting");
 
 
             for (int i = 0; i < 4; i++)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(600);
                 Console.Write(".");
 
             }

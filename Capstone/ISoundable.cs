@@ -8,8 +8,20 @@ namespace Capstone
     {
         public static void happySound()
         {
-            Console.Beep();
-                
+            Console.Beep(262, 400);
+            Console.Beep(330, 400);
+            Console.Beep(392, 400);
+        }
+        public static void welcomeSound()
+        {
+
+            Console.Beep(262, 250);
+            Console.Beep(330, 250);
+            Console.Beep(392, 250);
+            
+           
+         
+
         }
         public static void unhappySound()
         {

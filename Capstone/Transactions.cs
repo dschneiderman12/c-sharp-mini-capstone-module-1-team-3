@@ -27,7 +27,7 @@ namespace Capstone
                 IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n\n", ConsoleColor.Cyan);
                 return false;
             }
-            else if (wholeNumber > 10000)
+            else if (wholeNumber > 21474367)
             {
                 IColorable.Color($"Go buy your own machine.\n\n", ConsoleColor.Cyan);
                 return false;

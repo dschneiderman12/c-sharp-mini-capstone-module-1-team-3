@@ -53,10 +53,12 @@ namespace Capstone
         /// </summary>
         public void PrintMenu()
         {
+            ISoundable.happySound();
             string resultEvenTop = "";
             string resultEvenBottom = "";
             int i = 0;
             string[] menuArray = new string[this.ItemMenu.Count];
+            Console.Clear();
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
                 string resultLineTop = ($"{kvp.Key}- {kvp.Value.ProductName}");
@@ -116,7 +118,7 @@ namespace Capstone
                 {
                     resultOddTop = resultLineTop;
                     resultOddBottom = resultLineBottom;
-
+                    
                     IColorable.Color("   "+ topOfOurBox + topOfOurBox, ConsoleColor.DarkMagenta);
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine();
@@ -138,10 +140,13 @@ namespace Capstone
                     Console.WriteLine("║");
                     IColorable.Color("   "+ bottomOfBox + bottomOfBox, ConsoleColor.DarkMagenta);
                     Console.WriteLine();
+
+
                 }
                 i++;
             }
             Console.WriteLine();
+            IPauseable.shortPause();
         }
 
         /// <summary>
