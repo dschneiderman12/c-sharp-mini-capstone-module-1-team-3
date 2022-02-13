@@ -59,16 +59,16 @@ namespace Capstone
             string[] menuArray = new string[this.ItemMenu.Count];
             foreach (KeyValuePair<string, Item> kvp in this.ItemMenu)
             {
-                string resultLineTop = ($"{kvp.Key}-{kvp.Value.ProductName}");
+                string resultLineTop = ($"{kvp.Key}- {kvp.Value.ProductName}");
 
                 string resultLineBottom = "";
                 if (kvp.Value.Quantity == 0)
                 {
-                    resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, SOLD OUT");
+                    resultLineBottom = ($"{kvp.Value.Price.ToString("C")} SOLD OUT");
                 }
                 else
                 {
-                    resultLineBottom = ($"{kvp.Value.Price.ToString("C")}, {kvp.Value.Quantity} remaining");
+                    resultLineBottom = ($"{kvp.Value.Price.ToString("C")} {kvp.Value.Quantity} remaining");
                 }
                 int length = 22;
                 int spacesNeededTop = 22 - resultLineTop.Length;
@@ -117,10 +117,10 @@ namespace Capstone
                     resultOddTop = resultLineTop;
                     resultOddBottom = resultLineBottom;
 
-                    IColorable.Color(topOfOurBox + topOfOurBox, ConsoleColor.DarkMagenta);
+                    IColorable.Color("   "+ topOfOurBox + topOfOurBox, ConsoleColor.DarkMagenta);
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine();
-                    Console.Write("║");
+                    Console.Write("   ║");
                     IColorable.Color(resultEvenTop, ConsoleColor.DarkYellow);
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write("║║");
@@ -129,14 +129,14 @@ namespace Capstone
                     Console.WriteLine("║");
 
 
-                    Console.Write("║");
+                    Console.Write("   ║");
                     IColorable.Color(resultEvenBottom, ConsoleColor.DarkYellow);
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write("║║");
                     IColorable.Color(resultOddBottom, ConsoleColor.DarkYellow);
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("║");
-                    IColorable.Color(bottomOfBox + bottomOfBox, ConsoleColor.DarkMagenta);
+                    IColorable.Color("   "+ bottomOfBox + bottomOfBox, ConsoleColor.DarkMagenta);
                     Console.WriteLine();
                 }
                 i++;

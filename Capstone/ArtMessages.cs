@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Capstone
 {
-    public class ArtMessages
+    public class ArtMessages : IColorable
     {
         Inventory menu = new Inventory();
 
@@ -15,9 +15,12 @@ namespace Capstone
         /// <param name="picFile">ASCII art text file</param>
         public void GetPicture(string picFile)
         {
+            
             string directory = Environment.CurrentDirectory;
             string file = @"ASCII\" + picFile;
             string pic = Path.Combine(directory, file);
+          
+            
 
             try
             {
@@ -45,24 +48,35 @@ namespace Capstone
         {
             if (menu.ItemMenu[userSelection].Type == "Chip")
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                
                 GetPicture("chips.txt");
+                Console.Beep(500, 200);
+                Console.Beep(300, 200);
                 return "Crunch Crunch, Yum!";
+               
+               
             }
             else if (menu.ItemMenu[userSelection].Type == "Candy")
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 GetPicture("candy.txt");
                 return "Munch Munch, Yum!";
+                
             }
             else if (menu.ItemMenu[userSelection].Type == "Drink")
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 GetPicture("drink.txt");
                 return "Glug Glug, Yum!";
             }
             else if (menu.ItemMenu[userSelection].Type == "Gum")
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 GetPicture("gum.txt");
                 return "Chew Chew, Yum!";
             }
+         
             return "";
         }
 
