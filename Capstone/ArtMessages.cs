@@ -8,11 +8,8 @@ namespace Capstone
     public class ArtMessages : IColorable, IPauseable
     {
         Inventory menu = new Inventory();
-
-
         public void WelcomeMessage()
-        {   
-
+        {
             GetPicture("W.txt");
             IPauseable.ShortPause();
             Console.Clear();
@@ -35,11 +32,9 @@ namespace Capstone
             IPauseable.ShortPause();
             Console.Clear();
             GetPicture("welcome.txt");
+            ISoundable.WelcomeSound();
             IPauseable.ShortPause();
-       
-
-            //Console.Clear();
-
+      
             Console.ForegroundColor = ConsoleColor.White;
 
         }

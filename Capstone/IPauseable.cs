@@ -34,7 +34,10 @@ namespace Capstone
             }
             Thread.Sleep(1200);
             Console.WriteLine();
-        
+            //public static void WelcomeLettersPause()
+            //{
+            //    Thread.Sleep(200);
+            //}
         
         
         }

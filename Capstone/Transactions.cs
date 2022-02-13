@@ -64,7 +64,9 @@ namespace Capstone
             }
             else
             {
+                ISoundable.UnhappySound();
                 IColorable.Color("Insufficient funds.\n\n", ConsoleColor.Red);
+                IPauseable.PauseWithRedirect();
                 return false;
             }
         }
@@ -100,8 +102,9 @@ namespace Capstone
             }
             string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n\n";
             IColorable.Color(change, ConsoleColor.Green);
-            return change;
-            IPauseable.PauseWithRedirect();
+           
+           
+             return change;
         }
     }
 }
