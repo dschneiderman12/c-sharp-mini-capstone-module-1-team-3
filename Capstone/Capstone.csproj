@@ -20,6 +20,9 @@
     <None Update="ASCII\chips.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ASCII\DollarsIn.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ASCII\drink.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

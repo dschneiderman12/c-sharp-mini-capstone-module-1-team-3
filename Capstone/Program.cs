@@ -7,7 +7,7 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(60,45);
+            Console.SetWindowSize(55,55);
             UserInterface.MainMenu();
 
         }

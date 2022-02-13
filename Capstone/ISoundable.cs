@@ -15,9 +15,9 @@ namespace Capstone
         public static void welcomeSound()
         {
 
-            Console.Beep(262, 250);
-            Console.Beep(330, 250);
-            Console.Beep(392, 250);
+            Console.Beep(262, 350);
+            Console.Beep(330, 350);
+            Console.Beep(392, 350);
             
            
          

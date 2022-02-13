@@ -14,6 +14,11 @@ namespace Capstone
         {
             Thread.Sleep(400);
         }
+        public static void mediumPause()
+        {
+            Thread.Sleep(2000);
+        
+        }
         public static void pauseWithRedirect()
         {
             Thread.Sleep(2000);
@@ -27,6 +32,7 @@ namespace Capstone
                 Console.Write(".");
 
             }
+            Thread.Sleep(1500);
             Console.WriteLine();
         
         
