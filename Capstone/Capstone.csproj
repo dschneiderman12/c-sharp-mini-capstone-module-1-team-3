@@ -20,6 +20,9 @@
     <None Update="ASCII\drink.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ASCII\E.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ASCII\gum.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
