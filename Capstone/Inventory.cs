@@ -53,7 +53,7 @@ namespace Capstone
         /// </summary>
         public void PrintMenu()
         {
-            ISoundable.happySound();
+            ISoundable.HappySound();
             string resultEvenTop = "";
             string resultEvenBottom = "";
             int i = 0;
@@ -146,7 +146,7 @@ namespace Capstone
                 i++;
             }
             Console.WriteLine();
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
         }
 
         /// <summary>

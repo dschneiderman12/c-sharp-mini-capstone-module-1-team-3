@@ -6,13 +6,13 @@ namespace Capstone
 {
     interface ISoundable
     {
-        public static void happySound()
+        public static void HappySound()
         {
-            Console.Beep(262, 400);
-            Console.Beep(330, 400);
-            Console.Beep(392, 400);
+            Console.Beep(330, 300);
+          //  Console.Beep(262, 300);
+            //Console.Beep(330, 300);
         }
-        public static void welcomeSound()
+        public static void WelcomeSound()
         {
 
             Console.Beep(262, 350);
@@ -23,21 +23,16 @@ namespace Capstone
          
 
         }
-        public static void unhappySound()
+        public static void UnhappySound()
         {
             Console.Beep(250, 600);
             Console.Beep(250, 600);
             Console.Beep(250, 600);
 
         }
-        public static void freakingOutSound()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                Console.Beep(233, 600);
-            }
+       
        
         
-        }
+        
     }
 }

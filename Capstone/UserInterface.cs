@@ -9,15 +9,20 @@ namespace Capstone
     {
         public static void MainMenu()
         {
+
+            //makechange picture sound
+            //pause after -5
+
+
             Transactions transaction = new Transactions();
             Inventory inventory = new Inventory();
             ArtMessages art = new ArtMessages();
             Inventory.GetMenu();
-            ISoundable.welcomeSound();
-            ISoundable.welcomeSound();
+            ISoundable.WelcomeSound();
+            ISoundable.WelcomeSound();
             Console.ForegroundColor = ConsoleColor.Yellow;
             art.WelcomeMessage();
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             string mainMenuChoice;
             do
             {
@@ -34,12 +39,12 @@ namespace Capstone
                 Console.ForegroundColor = ConsoleColor.White;
                 mainMenuChoice = Console.ReadLine();
                 Console.WriteLine();
-                IPauseable.shortPause();
+                IPauseable.ShortPause();
 
                 if (mainMenuChoice == "1")
                 {
                     Console.Clear();
-                    IPauseable.shortPause();
+                    IPauseable.ShortPause();
                     inventory.PrintMenu();
                     
                 }
@@ -57,7 +62,7 @@ namespace Capstone
                         {
                             do
                             {
-                               
+                                ISoundable.HappySound();
                                 Console.Clear();
                                 Console.WriteLine("                  ┌───────────────┐            ");
                                 Console.WriteLine(" │****************| Purchase Menu |****************│");
@@ -76,24 +81,34 @@ namespace Capstone
 
                                 if (purchaseChoice == "1")
                                 {
+                                    ISoundable.HappySound();
                                     Console.Write("Please enter whole dollar amount (no decimal): ");
                                     string moneyInput = Console.ReadLine();
                                     Console.WriteLine();
 
                                     if (transaction.FeedMoney(moneyInput))
                                     {
-                                        ISoundable.happySound();
+                                        ISoundable.HappySound();
                                         
                                         
                                         sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
-                                       // Console.Clear();
+                                        IPauseable.ShortPause();
+                                        IPauseable.ShortPause();
+                                        Console.Clear();
+                                    //    Console.BackgroundColor = ConsoleColor.White;
+                                      //  Console.ForegroundColor = ConsoleColor.Black;
                                         art.GetPicture("DollarsIn.txt");
-                                        IPauseable.pauseWithRedirect();
+                                        IPauseable.LongPause();
+                                     //   Console.BackgroundColor = ConsoleColor.Black;
+                                      //  Console.ForegroundColor = ConsoleColor.White;
+
                                     }
+
                                 }
 
                                 if (purchaseChoice == "2")
                                 {
+                                    ISoundable.HappySound();
                                     inventory.PrintMenu();
                                     Console.Write("Select the location of your desired snack: ");
                                     string selection = Console.ReadLine().ToUpper();
@@ -108,13 +123,15 @@ namespace Capstone
                                                 inventory.ItemMenu[selection].Quantity--;
                                                  Console.Clear();
                                                 Console.WriteLine();
+                                                ISoundable.HappySound();
                                                 Console.WriteLine($"Dispensing {inventory.ItemMenu[selection].ProductName} for " +
                                                     $"{inventory.ItemMenu[selection].Price.ToString("C")}");
-                                                IPauseable.longPause();
-                                                IPauseable.mediumPause();
+                                                
+                                                IPauseable.ShortPause();
                                                
                                                 Console.WriteLine(art.ItemMessage(selection));
-                                                IPauseable.pauseWithRedirect();
+                                                
+                                                IPauseable.PauseWithRedirect();
                                                 Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.White;
                                                 Console.WriteLine();
@@ -128,31 +145,36 @@ namespace Capstone
                                         else
                                         {
                                             IColorable.Color("Sold Out :( Try again later!\n\n", ConsoleColor.Red);
-                                            IPauseable.pauseWithRedirect();
+                                            ISoundable.UnhappySound();
+                                            IPauseable.PauseWithRedirect();
                                         }
                                     }
                                     else
                                     {
                                         IColorable.Color("Item location code not found. Please try again.\n\n", ConsoleColor.Red);
-                                        IPauseable.pauseWithRedirect();
+                                        ISoundable.UnhappySound();
+                                        IPauseable.PauseWithRedirect();
                                     }
                                 }
                                 else if (purchaseChoice != "1" && purchaseChoice != "2" && purchaseChoice != "3")
                                 {
                                     IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
-                                    IPauseable.pauseWithRedirect();
+                                    IPauseable.PauseWithRedirect();
+                                    ISoundable.UnhappySound();
                                 }
 
                             } while (purchaseChoice != "3");
                         }
                         if (purchaseChoice == "3")
                         {
+                            ISoundable.HappySound();
                             Console.WriteLine($"Your remaining balance is {transaction.Balance.ToString("C")}.\n");
                             sw.WriteLine($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
                             transaction.GiveChange();
-                            IPauseable.longPause();
                             
-                            IPauseable.pauseWithRedirect();
+                            IPauseable.LongPause();
+                          
+                            IPauseable.PauseWithRedirect();
                             Console.Clear();
 
 
@@ -168,35 +190,37 @@ namespace Capstone
                 {
                     Console.Clear();
                     art.GoodbyeMessage();
+                    ISoundable.WelcomeSound();
                 }
 
                 if (mainMenuChoice == "4")
                 {
+                    ISoundable.HappySound();
                     Console.Write("Please enter password for sales report: ");
                     string password = Console.ReadLine();
                     Console.WriteLine();
                     if (password == "Interpolation")
                     {
-                        ISoundable.happySound();
+                        ISoundable.HappySound();
                         inventory.SalesReport();
-                        IPauseable.pauseWithRedirect();
+                        IPauseable.PauseWithRedirect();
                         Console.Clear();
                     }
                     else
                     {
-                        ISoundable.unhappySound();
+                        ISoundable.UnhappySound();
                         IColorable.Color("Password incorrect.\n\n", ConsoleColor.Red);
-                        IPauseable.pauseWithRedirect();
+                        IPauseable.PauseWithRedirect();
                         Console.Clear();
                     }
                     
                 }
                 else if (mainMenuChoice != "1" && mainMenuChoice != "2" && mainMenuChoice != "3" && mainMenuChoice != "4")
                 {
-                       ISoundable.unhappySound();
+                       ISoundable.UnhappySound();
                   
                     IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
-                    IPauseable.pauseWithRedirect();
+                    IPauseable.PauseWithRedirect();
                     Console.Clear();
 
                 }

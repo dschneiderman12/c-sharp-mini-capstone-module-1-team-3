@@ -14,28 +14,28 @@ namespace Capstone
         {   
 
             GetPicture("W.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("E.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("L.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("C.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("O.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("M.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("LastE.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
             Console.Clear();
             GetPicture("welcome.txt");
-            IPauseable.shortPause();
+            IPauseable.ShortPause();
        
 
             //Console.Clear();
@@ -86,8 +86,7 @@ namespace Capstone
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                
-                GetPicture("chips.txt");
-                ISoundable.happySound();
+                GetPicture("chips.txt");               
                 return "Crunch Crunch, Yum!";
                 
 
@@ -96,7 +95,6 @@ namespace Capstone
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 GetPicture("candy.txt");
-                ISoundable.happySound();
                 return "Munch Munch, Yum!";
 
             }
@@ -104,14 +102,12 @@ namespace Capstone
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 GetPicture("drink.txt");
-                ISoundable.happySound();
                 return "Glug Glug, Yum!";
             }
             else if (menu.ItemMenu[userSelection].Type == "Gum")
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 GetPicture("gum.txt");
-                ISoundable.happySound();
                 return "Chew Chew, Yum!";
             }
             

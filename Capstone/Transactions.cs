@@ -24,19 +24,26 @@ namespace Capstone
             }
             else if (wholeNumber >= 101 && wholeNumber <= 9999)
             {
+                ISoundable.UnhappySound();
                 IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n\n", ConsoleColor.Cyan);
-                IPauseable.longPause();
+                IPauseable.PauseWithRedirect();
+                
                 return false;
             }
             else if (wholeNumber >= 10000)
-            {
+            {  
+                ISoundable.UnhappySound();
                 IColorable.Color($"Go buy your own machine.\n\n", ConsoleColor.Cyan);
-                IPauseable.longPause();
+                IPauseable.PauseWithRedirect();
+                
                 return false;
             }
             else
             {
+                ISoundable.UnhappySound();
                 IColorable.Color("Invalid entry. Please enter a whole dollar amount.\n\n", ConsoleColor.Red);
+                IPauseable.PauseWithRedirect();
+              
                 return false;
             }
         }
@@ -94,6 +101,7 @@ namespace Capstone
             string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n\n";
             IColorable.Color(change, ConsoleColor.Green);
             return change;
+            IPauseable.PauseWithRedirect();
         }
     }
 }
