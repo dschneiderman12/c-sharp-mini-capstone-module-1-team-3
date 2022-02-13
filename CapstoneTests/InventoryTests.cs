@@ -9,7 +9,7 @@ namespace CapstoneTests
     [TestClass]
     public class InventoryTests
     {
-        [TestMethod]
+        [TestMethod("ItemExists() should return true if user inputs the slot location of an existing item.")]
         public void ItemExists_HappyPath()
         {
             //Arrange
@@ -24,7 +24,7 @@ namespace CapstoneTests
             Assert.IsTrue(result);
         }
 
-        [TestMethod("ItemExists() should return false if user inputs a non existent item ")]
+        [TestMethod("ItemExists() should return false if user inputs the slot location of a non existent item. ")]
         public void ItemExists_FalseTest()
         {
             //Arrange
@@ -75,36 +75,7 @@ namespace CapstoneTests
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
-        public void ItemMessage_ChipStringTest()
-        {
-            Inventory menu = new Inventory();
-            Item item = new Item();
-            ArtMessages art = new ArtMessages();
-            Inventory.GetMenu();
-            string testInput = "A1";
 
-            //Act
-            string result = art.ItemMessage(testInput);
-
-            //Assert
-            Assert.AreEqual("Crunch Crunch, Yum!", result);
-        }
-
-        [TestMethod]
-        public void ItemMessage_GumStringTest()
-        {
-            Inventory menu = new Inventory();
-            Item item = new Item();
-            ArtMessages art = new ArtMessages();
-            Inventory.GetMenu();
-            string testInput = "D4";
-
-            //Act
-            string result = art.ItemMessage(testInput);
-
-            //Assert
-            Assert.AreEqual("Chew Chew, Yum!", result);
-        }
     }
+
 }

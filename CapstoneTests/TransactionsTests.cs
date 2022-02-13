@@ -9,7 +9,7 @@ namespace CapstoneTests
     [TestClass]
     public class TransactionsTests
     {
-        [TestMethod("FeedMoney() should add money to the balance if given a positive whole number ")]
+        [TestMethod("FeedMoney() should add money to the balance if given a positive whole number. ")]
         public void FeedMoney_WholeNumberTest()
         {
             //Arrange
@@ -24,7 +24,7 @@ namespace CapstoneTests
             Assert.AreEqual(testBalance, transactions.Balance);
         }
 
-        [TestMethod("FeedMoney() should not add money to the balance if given a negative number ")]
+        [TestMethod("FeedMoney() should not add money to the balance if given a negative number. ")]
         public void FeedMoney_NegativeNumberTest()
         {
             //Arrange
@@ -39,7 +39,7 @@ namespace CapstoneTests
             Assert.AreEqual(testBalance, transactions.Balance);
         }
 
-        [TestMethod("FeedMoney() should not add money to the balance if not given a whole number ")]
+        [TestMethod("FeedMoney() should not add money to the balance if not given a whole number. ")]
         public void FeedMoney_NonWholeNumberTest()
         {
             //Arrange
@@ -54,7 +54,7 @@ namespace CapstoneTests
             Assert.AreEqual(testBalance, transactions.Balance);
         }
 
-        [TestMethod]
+        [TestMethod("PurchaseItem() should subtract the inputted price from the current balance. ")]
         public void PurchaseItem_HappyPath()
         {
             //Assert
@@ -69,7 +69,7 @@ namespace CapstoneTests
             Assert.AreEqual(1.50M, transactions.Balance);
         }
 
-        [TestMethod]
+        [TestMethod("PurchaseItem() should be able to completely empty the current balance")]
         public void PurchaseItem_AllInTest()
         {
             //Assert
@@ -84,7 +84,7 @@ namespace CapstoneTests
             Assert.AreEqual(0.00M, transactions.Balance);
         }
 
-        [TestMethod]
+        [TestMethod("PurchaseItem() should return false and should not subtract the user inputted price from the balance if the balance is zero.")]
         public void PurchaseItem_EmptyWalletTest()
         {
             //Assert
@@ -98,7 +98,7 @@ namespace CapstoneTests
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [TestMethod("GiveChange() should return the balance to the user, in the lowest number of coins possible")]
         public void GiveChange_TwoDimes()
         {
             //Arrange
@@ -115,7 +115,7 @@ namespace CapstoneTests
             Assert.AreEqual(transactions.Balance, 0.00M);
         }
 
-        [TestMethod]
+        [TestMethod("GiveChange() should not give out quarters if the balance is less than $0.25")]
         public void GiveChange_NickelAndDimedTest()
         {
             //Arrange
@@ -132,7 +132,7 @@ namespace CapstoneTests
             Assert.AreEqual(transactions.Balance, 0.00M);
         }
 
-        [TestMethod]
+        [TestMethod("GiveChange() should not give change if the balance is already $0.00")]
         public void GiveChange_ZeroBalance()
         {
             //Arrange
