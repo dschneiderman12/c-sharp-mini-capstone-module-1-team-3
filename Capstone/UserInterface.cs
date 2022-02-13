@@ -67,7 +67,7 @@ namespace Capstone
                                 Console.WriteLine(" │             (3) Finish Transaction              │");
                                 Console.WriteLine(" │                                                 │");
                                 Console.WriteLine(" │*************************************************│\n");
-                                IPauseable.mediumPause();
+                             
                                
                                 IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
 
@@ -86,7 +86,7 @@ namespace Capstone
                                         
                                         
                                         sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
-                                        Console.Clear();
+                                       // Console.Clear();
                                         art.GetPicture("DollarsIn.txt");
                                         IPauseable.pauseWithRedirect();
                                     }
@@ -110,7 +110,7 @@ namespace Capstone
                                                 Console.WriteLine();
                                                 Console.WriteLine($"Dispensing {inventory.ItemMenu[selection].ProductName} for " +
                                                     $"{inventory.ItemMenu[selection].Price.ToString("C")}");
-                                                //IPauseable.longPause();
+                                                IPauseable.longPause();
                                                 IPauseable.mediumPause();
                                                
                                                 Console.WriteLine(art.ItemMessage(selection));

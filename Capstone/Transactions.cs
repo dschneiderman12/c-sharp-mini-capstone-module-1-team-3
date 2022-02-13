@@ -22,14 +22,16 @@ namespace Capstone
                 this.Balance = this.Balance += moneyAdd;
                 return true;
             }
-            else if (wholeNumber >= 101 && wholeNumber <= 10000)
+            else if (wholeNumber >= 101 && wholeNumber <= 9999)
             {
                 IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n\n", ConsoleColor.Cyan);
+                IPauseable.longPause();
                 return false;
             }
-            else if (wholeNumber > 21474367)
+            else if (wholeNumber >= 10000)
             {
                 IColorable.Color($"Go buy your own machine.\n\n", ConsoleColor.Cyan);
+                IPauseable.longPause();
                 return false;
             }
             else
