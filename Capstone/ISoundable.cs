@@ -15,14 +15,14 @@ namespace Capstone
         public static void WelcomeSound()
         {
 
-            Console.Beep(262, 500);
-            Console.Beep(330, 500);
-            Console.Beep(392, 500);
-
-           
-            Console.Beep(330, 500);
-            Console.Beep(392, 500);
-            Console.Beep(530, 500);
+            Console.Beep(262, 400);
+            Console.Beep(330, 400);
+            Console.Beep(392, 400);
+                              
+                              
+            Console.Beep(330, 400);
+            Console.Beep(392, 400);
+            Console.Beep(530, 400);
         }
         public static void UnhappySound()
         {

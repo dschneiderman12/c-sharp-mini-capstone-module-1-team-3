@@ -12,7 +12,7 @@ namespace Capstone
         }
         public static void ShortPause()
         {
-            Thread.Sleep(600);
+            Thread.Sleep(400);
         }
         public static void MediumPause()
         {
