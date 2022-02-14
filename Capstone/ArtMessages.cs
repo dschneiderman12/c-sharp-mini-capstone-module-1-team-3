@@ -15,12 +15,9 @@ namespace Capstone
         /// <param name="picFile">ASCII art text file</param>
         public void GetPicture(string picFile)
         {
-
             string directory = Environment.CurrentDirectory;
             string file = @"ASCII\" + picFile;
             string pic = Path.Combine(directory, file);
-
-
 
             try
             {
@@ -103,7 +100,6 @@ namespace Capstone
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 return "Munch Munch, Yum!";
-
             }
             else if (menu.ItemMenu[userSelection].Type == "Drink")
             {
@@ -137,6 +133,5 @@ namespace Capstone
             Console.WriteLine();
             Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
         }
-
     }
 }
