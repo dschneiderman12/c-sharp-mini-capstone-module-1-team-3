@@ -29,10 +29,6 @@ namespace Capstone
             }
             Thread.Sleep(900);
             Console.WriteLine();
-            //public static void WelcomeLettersPause()
-            //{
-            //    Thread.Sleep(200);
-            //}               
         }
     }
 }

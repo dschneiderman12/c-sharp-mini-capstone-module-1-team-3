@@ -12,7 +12,7 @@ namespace Capstone
             ArtMessages art = new ArtMessages();
             Transactions transaction = new Transactions();
             Inventory inventory = new Inventory();
-
+            
             art.welcomeMessage();
             Inventory.GetMenu();
 
@@ -47,10 +47,10 @@ namespace Capstone
 
                 int buttonMashes = 0;
 
-                try
-                {
-                    using (StreamWriter sw = new StreamWriter(logFile, true))
-                    {
+                //try
+                //{
+                //    using (StreamWriter sw = new StreamWriter(logFile, true))
+                //    {
                         if (mainMenuChoice == "2")
                         {
                             do
@@ -76,7 +76,8 @@ namespace Capstone
                                     Console.WriteLine();
                                     if (transaction.FeedMoney(moneyInput))
                                     {
-                                        sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
+                                        //sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
+                                        inventory.LogList.Add($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
 
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         art.GetPicture("DollarsIn.txt");
@@ -110,7 +111,11 @@ namespace Capstone
                                                 Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.White;
                                                 Console.WriteLine();
-                                                sw.WriteLine($"{DateTime.Now} {inventory.ItemMenu[selection].ProductName} " +
+                                                //sw.WriteLine($"{DateTime.Now} {inventory.ItemMenu[selection].ProductName} " +
+                                                //    $"{inventory.ItemMenu[selection].SlotLocation} " +
+                                                //    $"{(transaction.Balance + inventory.ItemMenu[selection].Price).ToString("C")} " +
+                                                //    $"{transaction.Balance.ToString("C")}");
+                                                inventory.LogList.Add($"{DateTime.Now} {inventory.ItemMenu[selection].ProductName} " +
                                                     $"{inventory.ItemMenu[selection].SlotLocation} " +
                                                     $"{(transaction.Balance + inventory.ItemMenu[selection].Price).ToString("C")} " +
                                                     $"{transaction.Balance.ToString("C")}");
@@ -146,23 +151,38 @@ namespace Capstone
                         {
                             ISoundable.HappySound();
                             Console.WriteLine($"Your remaining balance is {transaction.Balance.ToString("C")}.\n");
-                            sw.WriteLine($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
+                            //sw.WriteLine($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
+                            inventory.LogList.Add($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
                             transaction.GiveChange();
                             IPauseable.PauseWithRedirect();
                             Console.Clear();
                         }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    Console.WriteLine(ex.Message);
+                //}
 
                 if (mainMenuChoice == "3")
                 {
                     Console.Clear();
                     ISoundable.WelcomeSound();
                     art.GoodbyeMessage();
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter(logFile, true))
+                        {
+                            foreach (string line in inventory.LogList)
+                            {
+                                sw.WriteLine(line);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
 
                 if (mainMenuChoice == "4")

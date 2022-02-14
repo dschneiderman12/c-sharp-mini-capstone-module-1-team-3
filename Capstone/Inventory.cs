@@ -16,6 +16,8 @@ namespace Capstone
             }
         }
 
+        public List<string> LogList = new List<string>();
+
         /// <summary>
         /// pulls menu from the vendingmachine.csv file, separates item properties, and puts into private backing field for an item menu dictionary
         /// </summary>
