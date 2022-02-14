@@ -12,7 +12,7 @@ namespace Capstone
             ArtMessages art = new ArtMessages();
             Transactions transaction = new Transactions();
             Inventory inventory = new Inventory();
-            
+
             art.welcomeMessage();
             Inventory.GetMenu();
 
@@ -45,124 +45,112 @@ namespace Capstone
                 string file = "Log.txt";
                 string logFile = Path.Combine(directory, file);
 
-                int buttonMashes = 0;
+                if (mainMenuChoice == "2")
+                {
+                    do
+                    {
+                        ISoundable.HappySound();
+                        Console.Clear();
+                        Console.WriteLine("                  ┌───────────────┐            ");
+                        Console.WriteLine(" │****************| Purchase Menu |****************│");
+                        Console.WriteLine(" │                └───────────────┘                │");
+                        Console.WriteLine(" │                 (1) Feed Money                  │");
+                        Console.WriteLine(" │               (2) Select Product                │");
+                        Console.WriteLine(" │             (3) Finish Transaction              │");
+                        Console.WriteLine(" │                                                 │");
+                        Console.WriteLine(" │*************************************************│\n");
+                        IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
+                        purchaseChoice = Console.ReadLine();
+                        Console.WriteLine();
 
-                //try
-                //{
-                //    using (StreamWriter sw = new StreamWriter(logFile, true))
-                //    {
-                        if (mainMenuChoice == "2")
+                        if (purchaseChoice == "1")
                         {
-                            do
+                            Console.Write("Please enter whole dollar amount (no decimal): ");
+                            string moneyInput = Console.ReadLine();
+                            Console.WriteLine();
+                            if (transaction.FeedMoney(moneyInput))
                             {
-                                ISoundable.HappySound();
-                                Console.Clear();
-                                Console.WriteLine("                  ┌───────────────┐            ");
-                                Console.WriteLine(" │****************| Purchase Menu |****************│");
-                                Console.WriteLine(" │                └───────────────┘                │");
-                                Console.WriteLine(" │                 (1) Feed Money                  │");
-                                Console.WriteLine(" │               (2) Select Product                │");
-                                Console.WriteLine(" │             (3) Finish Transaction              │");
-                                Console.WriteLine(" │                                                 │");
-                                Console.WriteLine(" │*************************************************│\n");
-                                IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
-                                purchaseChoice = Console.ReadLine();
-                                Console.WriteLine();
+                                inventory.LogList.Add($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
 
-                                if (purchaseChoice == "1")
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                art.GetPicture("DollarsIn.txt");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                IPauseable.MediumPause();
+                            }
+                            else
+                            {
+                                ISoundable.UnhappySound();
+                            }
+                        }
+                        if (purchaseChoice == "2")
+                        {
+                            inventory.PrintMenu();
+                            IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
+                            Console.Write("Select the location of your desired snack: ");
+                            string selection = Console.ReadLine().ToUpper();
+                            Console.WriteLine();
+                            if (inventory.ItemExists(selection))
+                            {
+                                if (inventory.ItemAvailable(selection))
                                 {
-                                    Console.Write("Please enter whole dollar amount (no decimal): ");
-                                    string moneyInput = Console.ReadLine();
-                                    Console.WriteLine();
-                                    if (transaction.FeedMoney(moneyInput))
+                                    if (transaction.PurchaseItem(inventory.ItemMenu[selection].Price))
                                     {
-                                        //sw.WriteLine($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
-                                        inventory.LogList.Add($"{DateTime.Now} FEED MONEY: ${moneyInput}.00 {transaction.Balance.ToString("C")}");
+                                        ISoundable.WelcomeSound();
+                                        inventory.ItemMenu[selection].Quantity--;
+                                        Console.Clear();
+                                        Console.WriteLine();
+                                        Console.WriteLine($"Dispensing {inventory.ItemMenu[selection].ProductName} for " +
+                                            $"{inventory.ItemMenu[selection].Price.ToString("C")}");
 
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        art.GetPicture("DollarsIn.txt");
-                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.WriteLine(art.ItemMessage(selection));
+                                        IPauseable.PauseWithRedirect();
                                         IPauseable.MediumPause();
-                                    }
-                                }
-                                if (purchaseChoice == "2")
-                                {
-                                    inventory.PrintMenu();
-                                    IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
-                                    Console.Write("Select the location of your desired snack: ");
-                                    string selection = Console.ReadLine().ToUpper();
-                                    Console.WriteLine();
-                                    if (inventory.ItemExists(selection))
-                                    {
-                                        if (inventory.ItemAvailable(selection))
-                                        {
-                                            if (transaction.PurchaseItem(inventory.ItemMenu[selection].Price))
-                                            {
-                                                ISoundable.WelcomeSound();
-                                                inventory.ItemMenu[selection].Quantity--;
-                                                Console.Clear();
-                                                Console.WriteLine();
-                                                Console.WriteLine($"Dispensing {inventory.ItemMenu[selection].ProductName} for " +
-                                                    $"{inventory.ItemMenu[selection].Price.ToString("C")}");
+                                        Console.Clear();
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.WriteLine();
 
-                                                Console.WriteLine(art.ItemMessage(selection));
-                                                IPauseable.PauseWithRedirect();
-                                                IPauseable.MediumPause();
-                                                Console.Clear();
-                                                Console.ForegroundColor = ConsoleColor.White;
-                                                Console.WriteLine();
-                                                //sw.WriteLine($"{DateTime.Now} {inventory.ItemMenu[selection].ProductName} " +
-                                                //    $"{inventory.ItemMenu[selection].SlotLocation} " +
-                                                //    $"{(transaction.Balance + inventory.ItemMenu[selection].Price).ToString("C")} " +
-                                                //    $"{transaction.Balance.ToString("C")}");
-                                                inventory.LogList.Add($"{DateTime.Now} {inventory.ItemMenu[selection].ProductName} " +
-                                                    $"{inventory.ItemMenu[selection].SlotLocation} " +
-                                                    $"{(transaction.Balance + inventory.ItemMenu[selection].Price).ToString("C")} " +
-                                                    $"{transaction.Balance.ToString("C")}");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            ISoundable.UnhappySound();
-                                            IColorable.Color("Sold Out :( Try again later!\n\n", ConsoleColor.Red);
-                                            IPauseable.PauseWithRedirect();
-                                            buttonMashes++;
-                                        }
+                                        inventory.LogList.Add($"{DateTime.Now} {inventory.ItemMenu[selection].ProductName} " +
+                                            $"{inventory.ItemMenu[selection].SlotLocation} " +
+                                            $"{(transaction.Balance + inventory.ItemMenu[selection].Price).ToString("C")} " +
+                                            $"{transaction.Balance.ToString("C")}");
                                     }
                                     else
                                     {
                                         ISoundable.UnhappySound();
-                                        IColorable.Color("Item location code not found. Please try again.\n\n", ConsoleColor.Red);
-                                        IPauseable.PauseWithRedirect();
-                                        buttonMashes++;
                                     }
                                 }
-                                else if (purchaseChoice != "1" && purchaseChoice != "2" && purchaseChoice != "3")
+                                else
                                 {
                                     ISoundable.UnhappySound();
-                                    IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
+                                    IColorable.Color("Sold Out :( Try again later!\n\n", ConsoleColor.Red);
                                     IPauseable.PauseWithRedirect();
-                                    buttonMashes++;
                                 }
-
-                            } while (purchaseChoice != "3");
+                            }
+                            else
+                            {
+                                ISoundable.UnhappySound();
+                                IColorable.Color("Item location code not found. Please try again.\n\n", ConsoleColor.Red);
+                                IPauseable.PauseWithRedirect();
+                            }
                         }
-                        if (purchaseChoice == "3")
+                        else if (purchaseChoice != "1" && purchaseChoice != "2" && purchaseChoice != "3")
                         {
-                            ISoundable.HappySound();
-                            Console.WriteLine($"Your remaining balance is {transaction.Balance.ToString("C")}.\n");
-                            //sw.WriteLine($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
-                            inventory.LogList.Add($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
-                            transaction.GiveChange();
+                            ISoundable.UnhappySound();
+                            IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
                             IPauseable.PauseWithRedirect();
-                            Console.Clear();
                         }
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //}
+
+                    } while (purchaseChoice != "3");
+                }
+                if (purchaseChoice == "3")
+                {
+                    ISoundable.HappySound();
+                    Console.WriteLine($"Your remaining balance is {transaction.Balance.ToString("C")}.\n");
+                    inventory.LogList.Add($"{DateTime.Now} GIVE CHANGE: {transaction.Balance.ToString("C")} $0.00");
+                    transaction.GiveChange();
+                    IPauseable.PauseWithRedirect();
+                    Console.Clear();
+                }
 
                 if (mainMenuChoice == "3")
                 {

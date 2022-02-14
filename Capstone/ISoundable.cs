@@ -23,8 +23,8 @@ namespace Capstone
         public static void UnhappySound()
         {
             Console.Beep(250, 500);
-            Console.Beep(250, 500);
-            Console.Beep(250, 500);
+            //Console.Beep(250, 500);
+            //Console.Beep(250, 500);
         }
     }
 }

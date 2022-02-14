@@ -24,7 +24,6 @@ namespace Capstone
             }
             else if (wholeNumber >= 101 && wholeNumber <= 9999)
             {
-                ISoundable.UnhappySound();
                 IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n\n", ConsoleColor.Cyan);
                 IPauseable.PauseWithRedirect();
 
@@ -32,7 +31,6 @@ namespace Capstone
             }
             else if (wholeNumber >= 10000)
             {
-                ISoundable.UnhappySound();
                 IColorable.Color($"Go buy your own machine.\n\n", ConsoleColor.Cyan);
                 IPauseable.PauseWithRedirect();
 
@@ -40,7 +38,6 @@ namespace Capstone
             }
             else
             {
-                ISoundable.UnhappySound();
                 IColorable.Color("Invalid entry. Please enter a whole dollar amount.\n\n", ConsoleColor.Red);
                 IPauseable.PauseWithRedirect();
 
@@ -64,7 +61,6 @@ namespace Capstone
             }
             else
             {
-                ISoundable.UnhappySound();
                 IColorable.Color("Insufficient funds.\n\n", ConsoleColor.Red);
                 IPauseable.PauseWithRedirect();
                 return false;

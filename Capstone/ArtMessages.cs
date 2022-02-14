@@ -42,14 +42,13 @@ namespace Capstone
             string file = @"ASCII\" + ("TextFile1.txt");
             string pic = Path.Combine(directory, file);
 
-
             try
             {
-                using (StreamReader taylorsStreamreader = new StreamReader(pic))
+                using (StreamReader taylorsStreamReader = new StreamReader(pic))
                 {
-                    while (!taylorsStreamreader.EndOfStream)
+                    while (!taylorsStreamReader.EndOfStream)
                     {
-                        string lineOfText = taylorsStreamreader.ReadLine();
+                        string lineOfText = taylorsStreamReader.ReadLine();
                         if (!lineOfText.Contains("***"))
                         {
                             Console.WriteLine(lineOfText);

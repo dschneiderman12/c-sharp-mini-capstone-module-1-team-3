@@ -9,7 +9,7 @@ namespace CapstoneTests
     [TestClass]
     public class ArtMessagesTests
     {
-        [TestMethod("The ItemMessage() method should return 'Crunch crunch, Yum!' if given the location of a 'chip' item")]
+        [TestMethod("The ItemMessage() method should return 'Crunch crunch, Yum!' if given the location of a 'chip' item.")]
         public void ItemMessage_ChipStringTest()
         {
             Inventory menu = new Inventory();
@@ -25,7 +25,7 @@ namespace CapstoneTests
             Assert.AreEqual("Crunch Crunch, Yum!", result);
         }
 
-        [TestMethod("The ItemMessage() method should return 'Chew Chew, Yum!' if given the location of a 'gum' item")]
+        [TestMethod("The ItemMessage() method should return 'Chew Chew, Yum!' if given the location of a 'gum' item.")]
         public void ItemMessage_GumStringTest()
         {
             Inventory menu = new Inventory();
@@ -41,7 +41,7 @@ namespace CapstoneTests
             Assert.AreEqual("Chew Chew, Yum!", result);
         }
 
-        [TestMethod("The ItemMessage() method should return 'Glug Glug, Yum!' if given the slot location of a 'drink' item")]
+        [TestMethod("The ItemMessage() method should return 'Glug Glug, Yum!' if given the slot location of a 'drink' item.")]
         public void ItemMessage_DrinkStringTest()
         {
             Inventory menu = new Inventory();
@@ -57,7 +57,7 @@ namespace CapstoneTests
             Assert.AreEqual("Glug Glug, Yum!", result);
         }
 
-        [TestMethod("The ItemMessage() method should return 'Munch Munch, Yum!' if given the location of a 'candy' item")]
+        [TestMethod("The ItemMessage() method should return 'Munch Munch, Yum!' if given the location of a 'candy' item.")]
         public void ItemMessage_CandyStringTest()
         {
             Inventory menu = new Inventory();

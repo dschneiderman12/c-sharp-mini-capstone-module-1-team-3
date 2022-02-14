@@ -24,7 +24,7 @@ namespace CapstoneTests
             Assert.IsTrue(result);
         }
 
-        [TestMethod("ItemExists() should return false if user inputs the slot location of a non existent item. ")]
+        [TestMethod("ItemExists() should return false if user inputs the slot location of a non existent item.")]
         public void ItemExists_FalseTest()
         {
             //Arrange
@@ -39,7 +39,7 @@ namespace CapstoneTests
             Assert.IsFalse(result);
         }
 
-        [TestMethod("ItemAvailable() should return false if an item quantity is 0")]
+        [TestMethod("ItemAvailable() should return false if an item quantity is 0.")]
         public void ItemAvailable_OutOfStockTest()
         {
             //Arrange
@@ -57,7 +57,7 @@ namespace CapstoneTests
             Assert.IsFalse(result);
         }
 
-        [TestMethod("ItemAvailable() should return true if an item quantity is greater than 0")]
+        [TestMethod("ItemAvailable() should return true if an item quantity is greater than 0.")]
 
         public void ItemAvailable_InStockTest()
         {
