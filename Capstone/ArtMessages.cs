@@ -8,8 +8,13 @@ namespace Capstone
     public class ArtMessages : IColorable, IPauseable
     {
         Inventory menu = new Inventory();
+
+        /// <summary>
+        /// Welcome message animation for the initial opening of the program
+        /// </summary>
         public void WelcomeMessage()
         {
+            ISoundable.WelcomeSound();
             GetPicture("W.txt");
             IPauseable.ShortPause();
             Console.Clear();
@@ -21,6 +26,7 @@ namespace Capstone
             Console.Clear();
             GetPicture("C.txt");
             IPauseable.ShortPause();
+            ISoundable.WelcomeSound();
             Console.Clear();
             GetPicture("O.txt");
             IPauseable.ShortPause();
@@ -32,9 +38,8 @@ namespace Capstone
             IPauseable.ShortPause();
             Console.Clear();
             GetPicture("welcome.txt");
-            ISoundable.WelcomeSound();
             IPauseable.ShortPause();
-      
+
             Console.ForegroundColor = ConsoleColor.White;
 
         }
@@ -45,12 +50,9 @@ namespace Capstone
 
         public void GetPicture(string picFile)
         {
-
             string directory = Environment.CurrentDirectory;
             string file = @"ASCII\" + picFile;
             string pic = Path.Combine(directory, file);
-
-
 
             try
             {
@@ -76,22 +78,18 @@ namespace Capstone
         /// 
         public string ItemMessage(string userSelection)
         {
-         
             if (menu.ItemMenu[userSelection].Type == "Chip")
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-               
-                GetPicture("chips.txt");               
-                return "Crunch Crunch, Yum!";
-                
 
+                GetPicture("chips.txt");
+                return "Crunch Crunch, Yum!";
             }
             else if (menu.ItemMenu[userSelection].Type == "Candy")
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 GetPicture("candy.txt");
                 return "Munch Munch, Yum!";
-
             }
             else if (menu.ItemMenu[userSelection].Type == "Drink")
             {
@@ -105,7 +103,6 @@ namespace Capstone
                 GetPicture("gum.txt");
                 return "Chew Chew, Yum!";
             }
-            
             return "";
         }
 
@@ -120,6 +117,5 @@ namespace Capstone
             Console.WriteLine();
             Console.WriteLine("\x1b[1mThanks for shopping with us! Have a great day!\x1b[0m\n");
         }
-
     }
 }

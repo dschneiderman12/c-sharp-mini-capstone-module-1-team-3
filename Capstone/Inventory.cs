@@ -130,7 +130,6 @@ namespace Capstone
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("║");
 
-
                     Console.Write("   ║");
                     IColorable.Color(resultEvenBottom, ConsoleColor.DarkYellow);
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -139,9 +138,7 @@ namespace Capstone
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("║");
                     IColorable.Color("   "+ bottomOfBox + bottomOfBox, ConsoleColor.DarkMagenta);
-                    Console.WriteLine();
-
-
+                    Console.WriteLine();                                      
                 }
                 i++;
             }

@@ -101,10 +101,9 @@ namespace Capstone
                 this.Balance -= .05M;
             }
             string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n\n";
-            IColorable.Color(change, ConsoleColor.Green);
+            IColorable.Color(change, ConsoleColor.Green);           
            
-           
-             return change;
+            return change;
         }
     }
 }

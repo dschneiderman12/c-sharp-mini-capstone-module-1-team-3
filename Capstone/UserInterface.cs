@@ -16,11 +16,10 @@ namespace Capstone
             
             Console.ForegroundColor = ConsoleColor.Yellow;
             art.WelcomeMessage();
-            IPauseable.MediumPause();
+            ///IPauseable.MediumPause();
             string mainMenuChoice;
             do
-            {
- 
+            { 
                 Console.WriteLine("                    ┌───────────┐    ");
                 Console.WriteLine(" │******************│ Main Menu │******************│");
                 Console.WriteLine(" │                  └───────────┘                  │");
@@ -39,7 +38,6 @@ namespace Capstone
                     Console.Clear();
                     IPauseable.ShortPause();
                     inventory.PrintMenu();
-
                 }
 
                 string purchaseChoice = "";
@@ -86,6 +84,7 @@ namespace Capstone
                                 if (purchaseChoice == "2")
                                 {
                                     inventory.PrintMenu();
+                                    IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
                                     Console.Write("Select the location of your desired snack: ");
                                     string selection = Console.ReadLine().ToUpper();
                                     Console.WriteLine();
@@ -103,7 +102,8 @@ namespace Capstone
                                                     $"{inventory.ItemMenu[selection].Price.ToString("C")}");
 
                                                 Console.WriteLine(art.ItemMessage(selection));
-                                                IPauseable.PauseWithRedirect();
+                                                //IPauseable.PauseWithRedirect();
+                                                IPauseable.MediumPause();
                                                 Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.White;
                                                 Console.WriteLine();
@@ -187,7 +187,6 @@ namespace Capstone
                     IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
                     IPauseable.PauseWithRedirect();
                     Console.Clear();
-
                 }
 
             } while (mainMenuChoice != "3");

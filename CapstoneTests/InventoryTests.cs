@@ -74,8 +74,5 @@ namespace CapstoneTests
             //Assert
             Assert.IsTrue(result);
         }
-
-
     }
-
 }

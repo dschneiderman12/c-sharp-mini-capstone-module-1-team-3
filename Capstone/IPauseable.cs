@@ -10,40 +10,34 @@ namespace Capstone
         {
             Thread.Sleep(3000);
         }
+
         public static void ShortPause()
         {
             Thread.Sleep(400);
         }
+
         public static void MediumPause()
         {
             Thread.Sleep(2000);
-        
         }
+
         public static void PauseWithRedirect()
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(200);
             Console.WriteLine();
             Console.Write("Redirecting");
-
 
             for (int i = 0; i < 4; i++)
             {
                 Thread.Sleep(400);
                 Console.Write(".");
-
             }
-            Thread.Sleep(1200);
+            Thread.Sleep(1000);
             Console.WriteLine();
             //public static void WelcomeLettersPause()
             //{
             //    Thread.Sleep(200);
-            //}
-        
-        
+            //}               
         }
-
-
-
-
     }
 }

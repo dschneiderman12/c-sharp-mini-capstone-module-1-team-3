@@ -147,5 +147,4 @@ namespace CapstoneTests
             Assert.AreEqual(transactions.Balance, 0.00M);
         }
     }
-
 }
