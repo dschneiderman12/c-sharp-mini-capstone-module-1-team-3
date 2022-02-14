@@ -41,15 +41,14 @@ namespace Capstone
             string directory = Environment.CurrentDirectory;
             string file = @"ASCII\" + ("TextFile1.txt");
             string pic = Path.Combine(directory, file);
-          
+
 
             try
             {
                 using (StreamReader taylorsStreamreader = new StreamReader(pic))
                 {
-
                     while (!taylorsStreamreader.EndOfStream)
-                    {   
+                    {
                         string lineOfText = taylorsStreamreader.ReadLine();
                         if (!lineOfText.Contains("***"))
                         {
@@ -61,17 +60,13 @@ namespace Capstone
                             Console.Clear();
                             continue;
                         }
-                  
-
                     }
-
                 }
             }
             catch (IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
         /// <summary>
@@ -90,8 +85,6 @@ namespace Capstone
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
                 return "Crunch Crunch, Yum!";
-
-
             }
             else if (menu.ItemMenu[userSelection].Type == "Candy")
             {
@@ -116,7 +109,6 @@ namespace Capstone
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 return "Chew Chew, Yum!";
-
             }
 
             return "";

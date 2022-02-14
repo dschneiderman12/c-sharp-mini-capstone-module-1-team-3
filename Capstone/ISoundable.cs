@@ -9,17 +9,13 @@ namespace Capstone
         public static void HappySound()
         {
             Console.Beep(330, 300);
-            //Console.Beep(262, 300);
-            //Console.Beep(330, 300);
         }
         public static void WelcomeSound()
         {
-
             Console.Beep(262, 400);
             Console.Beep(330, 400);
             Console.Beep(392, 400);
-                              
-                              
+
             Console.Beep(330, 400);
             Console.Beep(392, 400);
             Console.Beep(530, 400);

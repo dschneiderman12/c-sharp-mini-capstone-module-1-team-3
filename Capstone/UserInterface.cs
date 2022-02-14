@@ -10,20 +10,15 @@ namespace Capstone
         public static void MainMenu()
         {
             ArtMessages art = new ArtMessages();
-            art.welcomeMessage();
-
             Transactions transaction = new Transactions();
             Inventory inventory = new Inventory();
 
+            art.welcomeMessage();
             Inventory.GetMenu();
-
-
-
 
             string mainMenuChoice;
             do
             {
-
                 Console.WriteLine("                    ┌───────────┐    ");
                 Console.WriteLine(" │******************│ Main Menu │******************│");
                 Console.WriteLine(" │                  └───────────┘                  │");
@@ -73,20 +68,7 @@ namespace Capstone
                                 IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
                                 purchaseChoice = Console.ReadLine();
                                 Console.WriteLine();
-                           //     if (buttonMashes > 5)
-                           //     {
-                           //         IPauseable.PauseWithRedirect();
-                           //         Console.WriteLine("Stop messing with my vending machine!");
-                           //         IPauseable.MediumPause();
-                           //         if (transaction.Balance > 0)
-                           //         {
-                           //             Console.WriteLine($"Balance: { transaction.Balance}\n Stealing your change");
-                           //             IPauseable.MediumPause();
-                           //             IPauseable.PauseWithRedirect();
-                           //             transaction.Balance = 0M;
-                           //             Console.WriteLine();
-                           //         }
-                           //    }
+
                                 if (purchaseChoice == "1")
                                 {
                                     Console.Write("Please enter whole dollar amount (no decimal): ");
@@ -123,7 +105,7 @@ namespace Capstone
                                                     $"{inventory.ItemMenu[selection].Price.ToString("C")}");
 
                                                 Console.WriteLine(art.ItemMessage(selection));
-                                                //IPauseable.PauseWithRedirect();
+                                                IPauseable.PauseWithRedirect();
                                                 IPauseable.MediumPause();
                                                 Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.White;
@@ -201,9 +183,7 @@ namespace Capstone
                         ISoundable.UnhappySound();
                         IColorable.Color("Password incorrect.\n\n", ConsoleColor.Red);
                         IPauseable.PauseWithRedirect();
-                        buttonMashes++;
                     }
-
                 }
                 else if (mainMenuChoice != "1" && mainMenuChoice != "2" && mainMenuChoice != "3" && mainMenuChoice != "4")
                 {

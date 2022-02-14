@@ -104,13 +104,9 @@ namespace Capstone
             ArtMessages art = new ArtMessages();
 
             art.GetPicture("changeOut.txt");
-
-
             IColorable.Color(change, ConsoleColor.Green);
 
-
             return change;
-
         }
     }
 }

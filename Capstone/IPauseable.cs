@@ -6,11 +6,6 @@ namespace Capstone
 {
     interface IPauseable
     {
-        public static void LongPause()
-        {
-            Thread.Sleep(3000);
-        }
-
         public static void ShortPause()
         {
             Thread.Sleep(400);
