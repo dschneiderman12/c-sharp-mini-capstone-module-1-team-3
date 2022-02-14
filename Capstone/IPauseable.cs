@@ -12,7 +12,7 @@ namespace Capstone
         }
         public static void ShortPause()
         {
-            Thread.Sleep(400);
+            Thread.Sleep(600);
         }
         public static void MediumPause()
         {
@@ -28,11 +28,11 @@ namespace Capstone
 
             for (int i = 0; i < 4; i++)
             {
-                Thread.Sleep(400);
+                Thread.Sleep(200);
                 Console.Write(".");
 
             }
-            Thread.Sleep(1200);
+            Thread.Sleep(900);
             Console.WriteLine();
             //public static void WelcomeLettersPause()
             //{

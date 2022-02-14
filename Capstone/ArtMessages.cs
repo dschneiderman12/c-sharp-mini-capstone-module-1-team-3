@@ -8,41 +8,11 @@ namespace Capstone
     public class ArtMessages : IColorable, IPauseable
     {
         Inventory menu = new Inventory();
-        public void WelcomeMessage()
-        {
-            GetPicture("W.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("E.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("L.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("C.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("O.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("M.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("LastE.txt");
-            IPauseable.ShortPause();
-            Console.Clear();
-            GetPicture("welcome.txt");
-            ISoundable.WelcomeSound();
-            IPauseable.ShortPause();
-      
-            Console.ForegroundColor = ConsoleColor.White;
 
-        }
         /// <summary>
         /// Pulls a picture file based on input txt file
         /// </summary>
         /// <param name="picFile">ASCII art text file</param>
-
         public void GetPicture(string picFile)
         {
 
@@ -68,6 +38,44 @@ namespace Capstone
                 Console.WriteLine(ex.Message);
             }
         }
+        public void welcomeMessage()
+        {
+            ISoundable.WelcomeSound();
+            string directory = Environment.CurrentDirectory;
+            string file = @"ASCII\" + ("TextFile1.txt");
+            string pic = Path.Combine(directory, file);
+          
+
+            try
+            {
+                using (StreamReader taylorsStreamreader = new StreamReader(pic))
+                {
+
+                    while (!taylorsStreamreader.EndOfStream)
+                    {   
+                        string lineOfText = taylorsStreamreader.ReadLine();
+                        if (!lineOfText.Contains("***"))
+                        {
+                            Console.WriteLine(lineOfText);
+                        }
+                        if (lineOfText.Contains("***"))
+                        {
+                            IPauseable.ShortPause();
+                            Console.Clear();
+                            continue;
+                        }
+                  
+
+                    }
+
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
 
         /// <summary>
         /// Provides an item message and picture when purchased, depending on the type selected and matched in dictionary from the item code
@@ -76,20 +84,24 @@ namespace Capstone
         /// 
         public string ItemMessage(string userSelection)
         {
-         
+
             if (menu.ItemMenu[userSelection].Type == "Chip")
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-               
-                GetPicture("chips.txt");               
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+                GetPicture("chips.txt");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
                 return "Crunch Crunch, Yum!";
-                
+
 
             }
             else if (menu.ItemMenu[userSelection].Type == "Candy")
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 GetPicture("candy.txt");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
                 return "Munch Munch, Yum!";
 
             }
@@ -97,15 +109,20 @@ namespace Capstone
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 GetPicture("drink.txt");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
                 return "Glug Glug, Yum!";
             }
             else if (menu.ItemMenu[userSelection].Type == "Gum")
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 GetPicture("gum.txt");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
                 return "Chew Chew, Yum!";
+
             }
-            
+
             return "";
         }
 

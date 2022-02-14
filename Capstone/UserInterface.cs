@@ -9,18 +9,21 @@ namespace Capstone
     {
         public static void MainMenu()
         {
+            ArtMessages art = new ArtMessages();
+            art.welcomeMessage();
+
             Transactions transaction = new Transactions();
             Inventory inventory = new Inventory();
-            ArtMessages art = new ArtMessages();
+
             Inventory.GetMenu();
-            
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            art.WelcomeMessage();
-            IPauseable.MediumPause();
+
+
+
+
             string mainMenuChoice;
             do
             {
- 
+
                 Console.WriteLine("                    ┌───────────┐    ");
                 Console.WriteLine(" │******************│ Main Menu │******************│");
                 Console.WriteLine(" │                  └───────────┘                  │");
@@ -47,6 +50,9 @@ namespace Capstone
                 string directory = Environment.CurrentDirectory;
                 string file = "Log.txt";
                 string logFile = Path.Combine(directory, file);
+
+                int buttonMashes = 0;
+
                 try
                 {
                     using (StreamWriter sw = new StreamWriter(logFile, true))
@@ -68,6 +74,20 @@ namespace Capstone
                                 IColorable.Color($"Your current balance is {transaction.Balance.ToString("C")}\n\n", ConsoleColor.Green);
                                 purchaseChoice = Console.ReadLine();
                                 Console.WriteLine();
+                           //     if (buttonMashes > 5)
+                           //     {
+                           //         IPauseable.PauseWithRedirect();
+                           //         Console.WriteLine("Stop messing with my vending machine!");
+                           //         IPauseable.MediumPause();
+                           //         if (transaction.Balance > 0)
+                           //         {
+                           //             Console.WriteLine($"Balance: { transaction.Balance}\n Stealing your change");
+                           //             IPauseable.MediumPause();
+                           //             IPauseable.PauseWithRedirect();
+                           //             transaction.Balance = 0M;
+                           //             Console.WriteLine();
+                           //         }
+                           //    }
                                 if (purchaseChoice == "1")
                                 {
                                     Console.Write("Please enter whole dollar amount (no decimal): ");
@@ -80,7 +100,7 @@ namespace Capstone
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         art.GetPicture("DollarsIn.txt");
                                         Console.ForegroundColor = ConsoleColor.White;
-                                        IPauseable.PauseWithRedirect();
+                                        IPauseable.MediumPause();
                                     }
                                 }
                                 if (purchaseChoice == "2")
@@ -118,6 +138,7 @@ namespace Capstone
                                             ISoundable.UnhappySound();
                                             IColorable.Color("Sold Out :( Try again later!\n\n", ConsoleColor.Red);
                                             IPauseable.PauseWithRedirect();
+                                            buttonMashes++;
                                         }
                                     }
                                     else
@@ -125,6 +146,7 @@ namespace Capstone
                                         ISoundable.UnhappySound();
                                         IColorable.Color("Item location code not found. Please try again.\n\n", ConsoleColor.Red);
                                         IPauseable.PauseWithRedirect();
+                                        buttonMashes++;
                                     }
                                 }
                                 else if (purchaseChoice != "1" && purchaseChoice != "2" && purchaseChoice != "3")
@@ -132,6 +154,7 @@ namespace Capstone
                                     ISoundable.UnhappySound();
                                     IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
                                     IPauseable.PauseWithRedirect();
+                                    buttonMashes++;
                                 }
 
                             } while (purchaseChoice != "3");
@@ -155,7 +178,7 @@ namespace Capstone
                 if (mainMenuChoice == "3")
                 {
                     Console.Clear();
-                       ISoundable.WelcomeSound();
+                    ISoundable.WelcomeSound();
                     art.GoodbyeMessage();
                 }
 
@@ -177,7 +200,7 @@ namespace Capstone
                         ISoundable.UnhappySound();
                         IColorable.Color("Password incorrect.\n\n", ConsoleColor.Red);
                         IPauseable.PauseWithRedirect();
-                        Console.Clear();
+                        buttonMashes++;
                     }
 
                 }
@@ -187,6 +210,7 @@ namespace Capstone
                     IColorable.Color("Invalid choice. Please choose 1, 2, or 3.\n\n", ConsoleColor.Red);
                     IPauseable.PauseWithRedirect();
                     Console.Clear();
+                    buttonMashes++;
 
                 }
 

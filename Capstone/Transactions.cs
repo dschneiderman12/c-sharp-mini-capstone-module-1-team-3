@@ -6,7 +6,7 @@ namespace Capstone
 {
     public class Transactions : IColorable
     {
-        public decimal Balance { get; private set; }
+        public decimal Balance { get; set; }
 
         /// <summary>
         /// Accepts money from user and adds it to the balance, making sure the amount given is a whole number
@@ -27,15 +27,15 @@ namespace Capstone
                 ISoundable.UnhappySound();
                 IColorable.Color($"Where are you getting {wholeNumber} dollar bills??\n\n", ConsoleColor.Cyan);
                 IPauseable.PauseWithRedirect();
-                
+
                 return false;
             }
             else if (wholeNumber >= 10000)
-            {  
+            {
                 ISoundable.UnhappySound();
                 IColorable.Color($"Go buy your own machine.\n\n", ConsoleColor.Cyan);
                 IPauseable.PauseWithRedirect();
-                
+
                 return false;
             }
             else
@@ -43,7 +43,7 @@ namespace Capstone
                 ISoundable.UnhappySound();
                 IColorable.Color("Invalid entry. Please enter a whole dollar amount.\n\n", ConsoleColor.Red);
                 IPauseable.PauseWithRedirect();
-              
+
                 return false;
             }
         }
@@ -101,10 +101,16 @@ namespace Capstone
                 this.Balance -= .05M;
             }
             string change = $"Dispensing: {quarter} Quarter(s), {dime} Dime(s), {nickel} Nickel(s).\n\n";
+            ArtMessages art = new ArtMessages();
+
+            art.GetPicture("changeOut.txt");
+
+
             IColorable.Color(change, ConsoleColor.Green);
-           
-           
-             return change;
+
+
+            return change;
+
         }
     }
 }
